@@ -392,13 +392,19 @@
   /* ---------------------------------------------------------
      15. Canvas de rede neural (identidade do banner AYIO)
      --------------------------------------------------------- */
+  // Intensidade da constelação. 1 = base; 1.2 = +20%.
+  // Um número só, porque densidade e alcance se multiplicam: subir os dois
+  // na mesma proporção renderiza ~44% mais linhas, não 20%. O alcance entra
+  // amortecido para que o resultado percebido acompanhe o fator.
+  const NET = 1.2;
+
   function network(canvas) {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let w, h, dpr, nodes = [], raf, mouse = { x: -999, y: -999 };
     const conf = () => {
       const a = (canvas.width * canvas.height) / (dpr * dpr);
-      return Math.min(78, Math.max(26, Math.round(a / 24000)));
+      return Math.round(Math.min(78 * NET, Math.max(26 * NET, a / (24000 / NET))));
     };
     const resize = () => {
       dpr = Math.min(2, devicePixelRatio || 1);
@@ -416,7 +422,7 @@
     };
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
-      const link = Math.min(165, w * 0.12);
+      const link = Math.min(165, w * 0.12) * (1 + (NET - 1) * 0.4);
       for (let i = 0; i < nodes.length; i++) {
         const a = nodes[i];
         a.x += a.vx; a.y += a.vy; a.p += 0.02;
@@ -431,12 +437,12 @@
           const b = nodes[j];
           const d = Math.hypot(a.x - b.x, a.y - b.y);
           if (d > link) continue;
-          const o = (1 - d / link) * 0.26;
+          const o = (1 - d / link) * 0.26 * NET;
           ctx.strokeStyle = `rgba(120,190,235,${o})`;
           ctx.lineWidth = 0.7;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
         }
-        const glow = 0.45 + Math.sin(a.p) * 0.3;
+        const glow = Math.min(1, (0.45 + Math.sin(a.p) * 0.3) * NET);
         ctx.fillStyle = `rgba(150,215,240,${glow})`;
         ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2); ctx.fill();
       }

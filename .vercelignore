@@ -1,0 +1,9 @@
+# Referências de origem — NÃO publicar.
+# O Licensys.pdf contém a tabela de planos e valores que fica fora do site.
+ref/
+
+# Arquivos de trabalho
+README.md
+skills-lock.json
+.agents/
+.claude/

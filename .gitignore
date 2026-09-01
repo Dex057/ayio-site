@@ -1,0 +1,49 @@
+# ---------------------------------------------------------------
+# Referências de origem da marca
+#
+# IGNORADO POR PADRÃO — segurança, não organização.
+# ref/Licensys.pdf contém a tabela de planos e valores que ficou
+# deliberadamente fora do site. Se este repositório for público,
+# commitar a pasta deixaria esse PDF acessível para sempre no
+# histórico do Git (remover depois exige reescrever o histórico).
+#
+# Os arquivos continuam no disco — só não entram no versionamento.
+# Se o repositório for PRIVADO e você quiser versionar as referências,
+# apague a linha "ref/" abaixo.
+# ---------------------------------------------------------------
+ref/
+
+# Vercel
+.vercel/
+
+# Dependências (o site não usa, mas o CLI pode criar)
+node_modules/
+.npm/
+
+# Ambiente
+.env
+.env.*
+!.env.example
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ferramentas de agente
+.claude/
+.agents/
+skills-lock.json
+
+# Logs e temporários
+*.log
+npm-debug.log*
+.cache/
+tmp/

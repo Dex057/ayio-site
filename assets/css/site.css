@@ -30,11 +30,25 @@ ul{list-style:none}
   --text-dim:rgba(237,239,246,.62);
   --text-faint:rgba(237,239,246,.38);
 
-  /* Accent dinâmico — trocado por seção via JS */
-  --accent:#4FD1E0;
-  --accent-2:#2E45A0;
+  /* Accent dinâmico — trocado por seção via JS.
+     --accent é o azul da marca CLAREADO: precisa passar em texto pequeno
+     sobre fundo quase preto (7.4:1). O azul escuro fica nos preenchimentos. */
+  --accent:#7D9BF0;
+  --accent-2:#3F57B8;
   --accent-ink:#05070F;
-  --glow:rgba(79,209,224,.32);
+  --glow:rgba(62,87,184,.34);
+
+  /* Preenchimento sólido (botões): azul escuro da AYIO.
+     Sozinho ele quase some no fundo #05070F (1.5:1), então vem em gradiente
+     e com um fio de borda clara — é o que devolve a definição da forma. */
+  --fill:linear-gradient(135deg,#33499F,#1B2A5E);
+  --fill-hover:linear-gradient(135deg,#4A61CE,#27387F);
+  --on-fill:#FFFFFF;
+  --fill-edge:rgba(255,255,255,.18);
+
+  /* Texto grande em gradiente: faixa mais clara, senão a ponta escura some */
+  --grad-a:#A8BCFF;
+  --grad-b:#5C79DD;
 
   /* Produtos */
   --sc-navy:#1E3A5F;
@@ -116,7 +130,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 .eyebrow.no-bar::before{display:none}
 
 .grad-accent{
-  background:linear-gradient(100deg,var(--accent),var(--accent-2) 88%);
+  background:linear-gradient(100deg,var(--grad-a),var(--grad-b) 92%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 
@@ -143,7 +157,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 .pl-logo{width:180px;opacity:0;animation:plIn .9s var(--ease) .1s forwards}
 @keyframes plIn{to{opacity:1}}
 .pl-bar{width:100%;height:2px;background:rgba(255,255,255,.12);overflow:hidden;border-radius:99px}
-.pl-bar i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--navy-lit),#4FD1E0);transition:width .25s linear}
+.pl-bar i{display:block;height:100%;width:0%;background:linear-gradient(90deg,#1B2A5E,#7D9BF0);transition:width .25s linear}
 .pl-num{font-family:ui-monospace,monospace;font-size:.72rem;letter-spacing:.2em;color:var(--text-faint)}
 
 /* ---------- Cursor ---------- */
@@ -197,11 +211,12 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
   transform:translateY(101%);transition:transform .5s var(--ease);border-radius:99px;
 }
 .btn:hover::before{transform:translateY(0)}
-.btn--solid{background:var(--b);color:var(--accent-ink)}
-.btn--solid::before{background:#fff}
-.btn--solid:hover{color:#05070F}
+.btn--solid{background:var(--fill);color:var(--on-fill);border:1px solid var(--fill-edge)}
+.btn--solid::before{background:var(--fill-hover)}
+.btn--solid:hover{color:var(--on-fill);border-color:transparent}
 .btn--ghost{border:1px solid var(--line-strong);color:var(--text)}
-.btn--ghost:hover{color:var(--accent-ink);border-color:var(--b)}
+.btn--ghost::before{background:var(--fill-hover)}
+.btn--ghost:hover{color:var(--on-fill);border-color:transparent}
 .btn--sm{padding:10px 20px;font-size:.8rem}
 .btn i{display:inline-block;transition:transform .4s var(--ease)}
 .btn:hover i{transform:translateX(4px)}
@@ -245,7 +260,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
   content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
     radial-gradient(120% 80% at 50% 8%,rgba(27,42,94,.55),transparent 62%),
-    radial-gradient(90% 60% at 82% 88%,rgba(79,209,224,.10),transparent 70%),
+    radial-gradient(90% 60% at 82% 88%,rgba(125,155,240,.12),transparent 70%),
     linear-gradient(180deg,rgba(5,7,15,.62) 0%,rgba(5,7,15,.05) 34%,rgba(5,7,15,.86) 100%);
 }
 .hero__inner{position:relative;z-index:2;width:100%}
@@ -356,7 +371,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 }
 .stack__card::before{
   content:'';position:absolute;inset:0;pointer-events:none;
-  background:var(--p-glow,radial-gradient(90% 70% at 78% 8%,rgba(79,209,224,.16),transparent 66%));
+  background:var(--p-glow,radial-gradient(90% 70% at 78% 8%,rgba(125,155,240,.16),transparent 66%));
 }
 .stack__card > *{position:relative}
 /* Em telas pequenas o empilhamento vira fluxo normal */
@@ -367,8 +382,8 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 .prod{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(26px,4vw,64px);align-items:center}
 @media(max-width:980px){.prod{grid-template-columns:1fr}}
 .prod__badge{
-  display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;
-  font-family:ui-monospace,monospace;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:9px;padding:7px 17px;border-radius:99px;
+  font-family:var(--display);font-size:.73rem;font-weight:600;letter-spacing:.085em;text-transform:uppercase;
   background:var(--p-badge-bg,rgba(255,255,255,.08));color:var(--p-badge,#fff);
   border:1px solid var(--p-badge-bd,rgba(255,255,255,.16));margin-bottom:22px;
 }
@@ -442,9 +457,15 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 .crumb{display:flex;align-items:center;gap:10px;margin-bottom:26px;font-family:ui-monospace,monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint)}
 .crumb a:hover{color:var(--accent)}
 
-.theme-sc{--accent:#E23B3B;--accent-2:#C94D4D;--accent-ink:#fff;--glow:rgba(226,59,59,.22)}
-.theme-ls{--accent:#4FC28E;--accent-2:#1FA0A8;--accent-ink:#04150F;--glow:rgba(79,194,142,.20)}
-.theme-ad{--accent:#7BD3BD;--accent-2:#A783EB;--accent-ink:#0B1B26;--glow:rgba(167,131,235,.22)}
+.theme-sc{--accent:#F2726F;--accent-2:#C94D4D;--accent-ink:#2A0606;--glow:rgba(226,59,59,.24);
+  --fill:linear-gradient(135deg,#C21C1C,#7E0000);--fill-hover:linear-gradient(135deg,#E03434,#9E0505);
+  --grad-a:#FF9A97;--grad-b:#D24A4A}
+.theme-ls{--accent:#63D3A0;--accent-2:#1FA0A8;--accent-ink:#04150F;--glow:rgba(79,194,142,.22);
+  --fill:linear-gradient(135deg,#2A8D6E,#0F4D46);--fill-hover:linear-gradient(135deg,#37AC86,#166A5E);
+  --grad-a:#8FE8C0;--grad-b:#2C9E8C}
+.theme-ad{--accent:#9BE0CB;--accent-2:#A783EB;--accent-ink:#0B1B26;--glow:rgba(167,131,235,.24);
+  --fill:linear-gradient(135deg,#2C6E92,#164A67);--fill-hover:linear-gradient(135deg,#3C8CB6,#1D6088);
+  --grad-a:#A9E7D3;--grad-b:#8E6FD8}
 
 .tint{position:relative}
 .tint--sc{background:linear-gradient(180deg,#0B1220,#14202F 55%,#0B1220)}
@@ -482,7 +503,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border-block:1px solid var(--line)}
 @media(max-width:760px){.stats{grid-template-columns:1fr}}
 .stat{background:var(--ink);padding:clamp(24px,3vw,40px)}
-.stat .n{font-family:var(--display);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:600;letter-spacing:-.04em;line-height:1;background:linear-gradient(120deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .n{font-family:var(--display);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:600;letter-spacing:-.04em;line-height:1;background:linear-gradient(120deg,var(--grad-a),var(--grad-b));-webkit-background-clip:text;background-clip:text;color:transparent}
 .stat .l{margin-top:12px;font-size:.86rem;color:var(--text-dim)}
 
 /* Acordeão */

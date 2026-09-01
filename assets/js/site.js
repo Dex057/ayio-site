@@ -252,7 +252,7 @@
     const zones = $$('[data-accent]');
     if (!zones.length) return;
     const root = document.documentElement;
-    const base = { a: '#4FD1E0', b: '#2E45A0', ink: '#05070F', glow: 'rgba(79,209,224,.32)' };
+    const base = { a: '#7D9BF0', b: '#3F57B8', ink: '#05070F', glow: 'rgba(62,87,184,.34)' };
     const apply = z => {
       root.style.setProperty('--accent',   z ? z.dataset.accent   : base.a);
       root.style.setProperty('--accent-2', z ? (z.dataset.accent2 || z.dataset.accent) : base.b);

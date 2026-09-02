@@ -341,20 +341,30 @@
         break;
       }
 
-      // AdaptAI — o texto acadêmico vira a versão adaptada, revelada por máscara.
+      // AdaptAI — a página densa se reescreve como página adaptada.
       case 'adapta': {
-        const src = $('.ad--src', demo), out = $('.ad--out', demo);
-        const seta = $('.ad__ar', demo), chips = $$('.ad__chips span', demo);
-        const outP = $('p', out);
-        gsap.set([src, out], { opacity: 0, y: 12 });
-        gsap.set(seta, { opacity: 0, scale: .6 });
+        const src   = $('.pg--src', demo), out = $('.pg--out', demo);
+        const seta  = $('.pg__ar', demo);
+        const denso = $$('.pg--src > *', demo);
+        const pic   = $$('.pg__pic i', demo), txt = $('.pg__txt', demo);
+        const largo = $$('.pg__l--big', demo);
+        const chips = $$('.doc__chips span', demo);
+
+        gsap.set([src, out], { opacity: 0, y: 10 });
+        gsap.set([denso, largo], { scaleX: 0, transformOrigin: '0 50%' });
+        gsap.set(seta, { opacity: 0, x: -6 });
+        gsap.set(pic, { opacity: 0, scale: .7 });
+        gsap.set(txt, { clipPath: 'inset(0 100% 0 0)' });
         gsap.set(chips, { opacity: 0, y: 8 });
-        gsap.set(outP, { clipPath: 'inset(0 100% 0 0)' });
-        tl.to(src,   { opacity: 1, y: 0, duration: .5, ease: 'power2.out' }, 0)
-          .to(seta,  { opacity: .75, scale: 1, duration: .4, ease: 'back.out(2)' }, .5)
-          .to(out,   { opacity: 1, y: 0, duration: .45, ease: 'power2.out' }, .7)
-          .to(outP,  { clipPath: 'inset(0 0% 0 0)', duration: .8, ease: 'power2.inOut' }, .8)
-          .to(chips, { opacity: 1, y: 0, duration: .4, stagger: .12, ease: 'power2.out' }, 1.4);
+
+        tl.to(src,   { opacity: 1, y: 0, duration: .35, ease: 'power2.out' }, 0)
+          .to(denso, { scaleX: 1, duration: .3, stagger: .045, ease: 'power2.out' }, .1)
+          .to(seta,  { opacity: .8, x: 0, duration: .35, ease: 'back.out(2)' }, .7)
+          .to(out,   { opacity: 1, y: 0, duration: .4, ease: 'power2.out' }, .85)
+          .to(pic,   { opacity: 1, scale: 1, duration: .4, stagger: .1, ease: 'back.out(1.8)' }, 1)
+          .to(txt,   { clipPath: 'inset(0 0% 0 0)', duration: .6, ease: 'power2.inOut' }, 1.15)
+          .to(largo, { scaleX: 1, duration: .35, stagger: .12, ease: 'power2.out' }, 1.5)
+          .to(chips, { opacity: 1, y: 0, duration: .35, stagger: .1, ease: 'power2.out' }, 1.8);
         break;
       }
     }

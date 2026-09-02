@@ -35,11 +35,20 @@ ref/                        Arquivos de referência originais (não usados em ru
 Cada card da home mostra o produto funcionando, não o logo dele. As três micro-demos
 são amarradas ao scroll (`scrub`): quem rola controla a animação.
 
-| Produto | Demo | Janela |
-|---|---|---|
-| Seu Cartório | conversa: pergunta → IA digitando → resposta | entrada do card |
-| LicenSys | barras de prazo enchendo + alerta preventivo acendendo | entrada do card |
-| AdaptAI | texto acadêmico revelado por máscara na versão adaptada | entrada do card |
+| Produto | Demo |
+|---|---|
+| Seu Cartório | conversa: pergunta → IA digitando → resposta |
+| LicenSys | barras de prazo enchendo + alerta preventivo acendendo |
+| AdaptAI | página densa → página adaptada: menos linhas, tipografia maior, pictogramas |
+
+A barra de título de cada janela é a barra da marca do produto, com o fundo que a
+própria identidade pede: o Seu Cartório é knockout e usa fundo escuro; LicenSys e
+AdaptAI são coloridos sobre claro e usam o branco/off-white dos seus originais.
+Os lockups horizontais (`assets/brand/hdr-*.png`) foram montados a partir dos
+arquivos de referência, sem a tagline, para caber legíveis a 26px de altura.
+
+No mobile o empilhamento sticky é desligado e a demo sobe para logo abaixo do
+título — sem ela no meio, o card vira uma parede de texto até o rodapé.
 
 A janela é a **entrada** do card, terminando pouco antes de ele encostar no topo:
 dali em diante o card seguinte já começa a cobri-lo, e uma demo rodando embaixo de

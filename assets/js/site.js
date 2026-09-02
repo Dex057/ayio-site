@@ -290,31 +290,118 @@
   }
 
   /* ---------------------------------------------------------
-     10. Cards empilhados (escala/opacidade conforme o próximo cobre)
+     10. Cards empilhados + demos vivas dos produtos (GSAP ScrollTrigger)
      --------------------------------------------------------- */
+
+  // Janela de scroll em que a demo roda.
+  // No desktop ela acontece na ENTRADA do card, terminando pouco antes de ele
+  // encostar no topo — dali em diante o próximo card já começa a cobri-lo, e
+  // uma demo rodando embaixo de outro card é história contada pela metade.
+  // No mobile não há empilhamento: a janela é a passagem do card pela tela.
+  const demoST = (item, pinned) => pinned
+    ? { trigger: item, start: 'top 85%', end: 'top 12%',    scrub: .8 }
+    : { trigger: item, start: 'top 80%', end: 'bottom 65%', scrub: .8 };
+
+  function buildDemo(item, gsap, pinned) {
+    const demo = $('[data-demo]', item);
+    if (!demo) return;
+    const tl = gsap.timeline({ scrollTrigger: demoST(item, pinned) });
+
+    switch (demo.dataset.demo) {
+
+      // Seu Cartório — a pergunta chega, a IA "digita", a resposta se monta.
+      case 'chat': {
+        const bubs = $$('.bub', demo);
+        gsap.set(bubs, { opacity: 0, y: 16 });
+        bubs.forEach((b, i) => {
+          const at = i * .6;
+          tl.to(b, { opacity: 1, y: 0, duration: .5, ease: 'power2.out' }, at);
+          // o "digitando" colapsa quando a resposta chega (-9px zera o gap do flex)
+          if (b.classList.contains('bub--dots')) {
+            tl.to(b, { opacity: 0, height: 0, paddingTop: 0, paddingBottom: 0, marginBottom: -9, duration: .3 }, at + .85);
+          }
+        });
+        break;
+      }
+
+      // LicenSys — as barras de prazo enchem e o alerta preventivo acende.
+      case 'prazos': {
+        const rows = $$('.rw', demo), alerta = $('.demo__alert', demo);
+        gsap.set(rows, { opacity: 0, x: -18 });
+        gsap.set($$('.rw s em', demo), { width: 0 });
+        rows.forEach((r, i) => {
+          const at = i * .38;
+          tl.to(r, { opacity: 1, x: 0, duration: .45, ease: 'power2.out' }, at)
+            .to($('s em', r), { width: r.style.getPropertyValue('--w') || '50%', duration: .75, ease: 'power2.out' }, at + .18);
+        });
+        if (alerta) {
+          gsap.set(alerta, { opacity: 0, y: 14 });
+          tl.to(alerta, { opacity: 1, y: 0, duration: .5, ease: 'power3.out' }, '>-.2');
+        }
+        break;
+      }
+
+      // AdaptAI — o texto acadêmico vira a versão adaptada, revelada por máscara.
+      case 'adapta': {
+        const src = $('.ad--src', demo), out = $('.ad--out', demo);
+        const seta = $('.ad__ar', demo), chips = $$('.ad__chips span', demo);
+        const outP = $('p', out);
+        gsap.set([src, out], { opacity: 0, y: 12 });
+        gsap.set(seta, { opacity: 0, scale: .6 });
+        gsap.set(chips, { opacity: 0, y: 8 });
+        gsap.set(outP, { clipPath: 'inset(0 100% 0 0)' });
+        tl.to(src,   { opacity: 1, y: 0, duration: .5, ease: 'power2.out' }, 0)
+          .to(seta,  { opacity: .75, scale: 1, duration: .4, ease: 'back.out(2)' }, .5)
+          .to(out,   { opacity: 1, y: 0, duration: .45, ease: 'power2.out' }, .7)
+          .to(outP,  { clipPath: 'inset(0 0% 0 0)', duration: .8, ease: 'power2.inOut' }, .8)
+          .to(chips, { opacity: 1, y: 0, duration: .4, stagger: .12, ease: 'power2.out' }, 1.4);
+        break;
+      }
+    }
+  }
+
   function stackCards() {
     const items = $$('.stack__item');
     if (!items.length) return;
-    let ticking = false;
-    const upd = () => {
-      const off = innerWidth <= 980;
+
+    const gsap = window.gsap, ST = window.ScrollTrigger;
+    // Sem GSAP (ou com movimento reduzido) o CSS já entrega o estado final:
+    // demos montadas e cards em fluxo normal. Não há nada a degradar.
+    if (!gsap || !ST || reduced) return;
+    gsap.registerPlugin(ST);
+
+    const mm = gsap.matchMedia();
+
+    // Abaixo de 980px o sticky é desligado no CSS: só as demos rodam.
+    mm.add('(max-width:980px)', () => {
+      items.forEach(item => buildDemo(item, gsap, false));
+    });
+
+    mm.add('(min-width:981px)', () => {
       items.forEach((item, i) => {
+        buildDemo(item, gsap, true);
+
+        // Encolhe e escurece enquanto o próximo card cobre este.
         const card = $('.stack__card', item);
-        if (!card) return;
-        if (off) { card.style.transform = ''; card.style.filter = ''; return; }
-        const next = items[i + 1];
-        if (!next) { card.style.transform = ''; card.style.filter = ''; return; }
-        const r = next.getBoundingClientRect();
-        // 0 -> próximo ainda longe ; 1 -> próximo já cobriu
-        const k = Math.max(0, Math.min(1, 1 - r.top / innerHeight));
-        card.style.transform = `scale(${(1 - k * 0.075).toFixed(4)}) translateY(${(-k * 26).toFixed(1)}px)`;
-        card.style.filter = `brightness(${(1 - k * 0.34).toFixed(3)})`;
+        if (card && items[i + 1]) {
+          // fromTo, e não to: o filter do card é `none`, e o GSAP lê `none`
+          // como brightness(0) — sem o estado inicial explícito o card entra preto.
+          gsap.fromTo(card,
+            { filter: 'brightness(1)' },
+            {
+              scale: .925, y: -26, filter: 'brightness(.66)', ease: 'none',
+              scrollTrigger: { trigger: item, start: 'top top', end: '+=100%', scrub: true }
+            });
+        }
+
+        // Numeral 01/02/03 em parallax.
+        const idx = $('.prod__idx', item);
+        if (idx) gsap.to(idx, {
+          yPercent: -20, ease: 'none',
+          scrollTrigger: { trigger: item, start: 'top bottom', end: 'bottom top', scrub: true }
+        });
       });
-      ticking = false;
-    };
-    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(upd); } }, { passive: true });
-    addEventListener('resize', upd);
-    upd();
+    });
   }
 
   /* ---------------------------------------------------------

@@ -1,6 +1,8 @@
 # Site AYIO — AI Software Studio
 
-Site institucional estático (HTML + CSS + JS puro, sem build e sem dependências).
+Site institucional estático (HTML + CSS + JS puro, sem build e sem gerenciador de pacotes).
+Única dependência: GSAP + ScrollTrigger, versionados em `assets/vendor/` — nada é
+baixado em runtime, nenhuma requisição sai para terceiros.
 
 ## Rodar
 
@@ -21,11 +23,30 @@ produtos/seu-cartorio.html  Carro-chefe: atendimento com IA + Ata Notarial
 produtos/licensys.html      Gestão ambiental inteligente
 produtos/adaptai.html       Educação inclusiva
 assets/css/site.css         Design system + todos os efeitos
-assets/js/site.js           Efeitos (sem libs externas)
+assets/js/site.js           Efeitos
+assets/vendor/              GSAP 3.13 + ScrollTrigger (licença gratuita, uso comercial)
 assets/brand/               Logos extraídos dos arquivos de referência
 assets/img/                 Imagens de conteúdo
 ref/                        Arquivos de referência originais (não usados em runtime)
 ```
+
+## Demos vivas dos produtos
+
+Cada card da home mostra o produto funcionando, não o logo dele. As três micro-demos
+são amarradas ao scroll (`scrub`): quem rola controla a animação.
+
+| Produto | Demo | Janela |
+|---|---|---|
+| Seu Cartório | conversa: pergunta → IA digitando → resposta | entrada do card |
+| LicenSys | barras de prazo enchendo + alerta preventivo acendendo | entrada do card |
+| AdaptAI | texto acadêmico revelado por máscara na versão adaptada | entrada do card |
+
+A janela é a **entrada** do card, terminando pouco antes de ele encostar no topo:
+dali em diante o card seguinte já começa a cobri-lo, e uma demo rodando embaixo de
+outro card é história contada pela metade.
+
+Sem GSAP, ou com `prefers-reduced-motion: reduce`, o estado final é o estado natural
+do CSS — as demos aparecem montadas e legíveis, sem nenhum salto.
 
 ## Efeitos implementados
 

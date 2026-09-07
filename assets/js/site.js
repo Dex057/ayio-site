@@ -12,30 +12,7 @@
   const lerp    = (a, b, t) => a + (b - a) * t;
 
   /* ---------------------------------------------------------
-     1. Preloader
-     --------------------------------------------------------- */
-  function preloader() {
-    const el = $('#preloader');
-    if (!el) { document.body.classList.remove('is-loading'); start(); return; }
-    const bar = $('.pl-bar i', el), num = $('.pl-num', el);
-    let p = 0;
-    const tick = setInterval(() => {
-      p = Math.min(100, p + Math.random() * 16 + 5);
-      if (bar) bar.style.width = p + '%';
-      if (num) num.textContent = String(Math.round(p)).padStart(3, '0');
-      if (p >= 100) {
-        clearInterval(tick);
-        setTimeout(() => {
-          el.classList.add('done');
-          document.body.classList.remove('is-loading');
-          start();
-        }, 260);
-      }
-    }, reduced ? 40 : 130);
-  }
-
-  /* ---------------------------------------------------------
-     2. Scroll suave (inércia) — só desktop, sem reduced-motion
+     1. Scroll suave (inércia) — só desktop, sem reduced-motion
      --------------------------------------------------------- */
   function smoothScroll() {
     if (reduced || !fine) return;
@@ -601,6 +578,6 @@
     network($('.hero__canvas'));
     network($('.p-hero__canvas'));
     year();
-    preloader();
+    start();
   });
 })();

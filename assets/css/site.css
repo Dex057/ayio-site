@@ -354,6 +354,17 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 }
 .card--client p{color:var(--text);font-size:.98rem;font-weight:500;line-height:1.4;max-width:32ch}
 
+/* Cards de feedback/depoimento */
+.card--quote{display:flex;flex-direction:column;gap:22px;justify-content:space-between}
+.card--quote::after{
+  content:'“';position:absolute;top:2px;right:24px;font-family:var(--display);
+  font-size:4.6rem;line-height:1;color:var(--accent);opacity:.16;pointer-events:none;
+}
+.card--quote p{color:var(--text);font-size:1.02rem;line-height:1.55;position:relative;z-index:1}
+.card--quote footer{display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--line);padding-top:14px}
+.card--quote footer .n{font-family:var(--display);font-weight:600;font-size:.92rem;color:var(--text)}
+.card--quote footer .r{font-size:.78rem;color:var(--text-faint)}
+
 /* Lista de features */
 .feats{display:grid;gap:2px;border-top:1px solid var(--line)}
 .feats li{

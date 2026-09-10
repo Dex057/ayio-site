@@ -354,7 +354,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
   transition:padding-left .5s var(--ease),color .4s;
 }
 .feats li:hover{padding-left:14px}
-.feats li .k{font-family:ui-monospace,monospace;font-size:.7rem;letter-spacing:.16em;color:var(--accent);padding-top:.35em}
+.feats li .k{font-family:ui-monospace,monospace;font-size:.7rem;letter-spacing:.16em;color:var(--c,var(--accent));padding-top:.35em}
 .feats li .t{font-family:var(--display);font-size:clamp(1.05rem,1.7vw,1.4rem);font-weight:500;letter-spacing:-.02em}
 .feats li .d{grid-column:2;color:var(--text-dim);font-size:.93rem;margin-top:.4rem;max-width:64ch}
 
@@ -520,7 +520,6 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
   .pg__pic svg{width:17px;height:17px}
   .pg__txt{font-size:.76rem}
 }
-}
 
 /* ---------- Passos ---------- */
 .steps{counter-reset:s;display:grid;gap:0}
@@ -657,3 +656,57 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
   .js .media::after{display:none}
   body::after{display:none}
 }
+
+/* ---------- AdaptAI: composições ----------
+   As lâminas do produto traziam foto E texto; o texto virou HTML e só a
+   parte que o código não faz (as crianças, o mascote) continua bitmap.
+   O resto da estética — roda de pinceladas, pílulas coloridas, onda
+   pastel, cápsulas — é desenhado aqui. */
+
+/* Bloco "o que é": texto + foto recortada dentro da roda da marca */
+.ad-intro{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.78fr);gap:clamp(34px,6vw,86px);align-items:center}
+@media(max-width:900px){.ad-intro{grid-template-columns:1fr;gap:clamp(40px,7vw,56px)}}
+.ad-photo{position:relative;justify-self:center;width:min(100%,468px);padding:8.5% 13%;margin:0}
+.ad-photo img{position:relative;z-index:1;width:100%;filter:drop-shadow(0 34px 64px rgba(0,0,0,.6))}
+.ad-photo__ring{
+  position:absolute;z-index:0;inset:0;border-radius:50%;
+  background:conic-gradient(from -20deg,
+    #1B54B8 0 16%,#D32F2F 22% 38%,#F2B705 44% 60%,#3AAA35 66% 82%,#1B54B8 88% 100%);
+  -webkit-mask:radial-gradient(closest-side,transparent 78%,#000 81%);
+          mask:radial-gradient(closest-side,transparent 78%,#000 81%);
+  opacity:.85;
+}
+.ad-photo__ring::after{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:inherit;filter:blur(22px);opacity:.5;
+}
+
+.ad-kicker{font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint);margin-bottom:13px}
+.ad-chips{display:flex;flex-wrap:wrap;gap:9px}
+.ad-chips li{
+  font-size:.79rem;font-weight:600;letter-spacing:-.01em;padding:8px 16px;border-radius:99px;
+  color:var(--c);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);
+  background:color-mix(in srgb,var(--c) 11%,transparent);
+  transition:transform .4s var(--ease),background .4s;
+}
+.ad-chips li:hover{transform:translateY(-3px);background:color-mix(in srgb,var(--c) 22%,transparent)}
+
+/* Bloco "o conjunto": mascote + as seis frentes como pílulas */
+.ad-suite{position:relative;display:grid;grid-template-columns:minmax(0,.66fr) minmax(0,1.34fr);gap:clamp(30px,5vw,74px);align-items:center}
+@media(max-width:980px){.ad-suite{grid-template-columns:1fr;gap:clamp(34px,6vw,48px)}}
+.ad-wave{position:absolute;z-index:0;left:-6%;right:-6%;top:50%;translate:0 -50%;width:112%;height:auto;pointer-events:none}
+.ad-bot{position:relative;z-index:1;justify-self:center;width:min(100%,330px);margin:0}
+.ad-bot img{width:100%;filter:drop-shadow(0 30px 58px rgba(0,0,0,.5))}
+.ad-feat{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,40px)}
+@media(max-width:700px){.ad-feat{grid-template-columns:1fr;gap:26px}}
+.ad-feat li{display:grid;justify-items:start;gap:11px}
+.ad-feat .t{
+  padding:7px 15px;border-radius:10px;background:var(--c);color:#08121C;
+  font-family:var(--display);font-weight:600;font-size:.87rem;letter-spacing:-.015em;
+  box-shadow:0 10px 26px -14px var(--c);
+}
+.ad-feat p{color:var(--text-dim);font-size:.95rem;max-width:34ch}
+
+/* Cápsulas soltas — a moldura da lâmina de legislação */
+.ad-caps{width:min(64%,220px);margin-top:clamp(28px,4vw,46px);opacity:.55;pointer-events:none}
+@media(max-width:900px){.ad-caps{display:none}}

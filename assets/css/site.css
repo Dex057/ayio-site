@@ -751,5 +751,11 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
   -webkit-mask-image:radial-gradient(closest-side,#000 40%,transparent 100%);
           mask-image:radial-gradient(closest-side,#000 40%,transparent 100%);
 }
+/* Fundo não-preto (ex.: tint--sc): o screen clareia as sombras e lava o vídeo, então mistura normal + miolo maior */
+.split-video--solid video{
+  mix-blend-mode:normal;filter:contrast(1.12) saturate(1.1);
+  -webkit-mask-image:radial-gradient(closest-side,#000 58%,transparent 100%);
+          mask-image:radial-gradient(closest-side,#000 58%,transparent 100%);
+}
 @media(max-width:900px){.split-video{width:min(80%,320px);margin:0 auto clamp(20px,5vw,32px)}}
 @media(prefers-reduced-motion:reduce){.split-video{display:none}}

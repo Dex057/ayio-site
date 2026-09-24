@@ -669,11 +669,11 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
    pastel, cápsulas — é desenhado aqui. */
 
 /* Bloco "o que é": texto + foto recortada dentro da roda da marca */
-.ad-intro{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.78fr);gap:clamp(34px,6vw,86px);align-items:center}
+.ad-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.94fr);gap:clamp(34px,5vw,68px);align-items:center}
 @media(max-width:900px){.ad-intro{grid-template-columns:1fr;gap:clamp(40px,7vw,56px)}}
 .ad-photo{
-  --blob:58% 42% 47% 53% / 44% 52% 48% 56%;
-  position:relative;justify-self:center;width:min(100%,520px);margin:0;
+  --blob:72% 28% 56% 44% / 36% 64% 36% 64%;
+  position:relative;justify-self:center;width:min(100%,620px);margin:0;
   padding:clamp(9px,1.7vw,16px);border-radius:var(--blob);
   background:conic-gradient(from 195deg,
     #1B54B8,#6EB7EB 14%,#3AAA35 32%,#F2B705 52%,#D32F2F 72%,#A783EB 88%,#1B54B8);
@@ -689,11 +689,13 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
   animation:inherit;
 }
 @keyframes adBlob{
-  0%  {border-radius:58% 42% 47% 53% / 44% 52% 48% 56%}
-  50% {border-radius:44% 56% 61% 39% / 55% 41% 59% 45%}
-  100%{border-radius:52% 48% 38% 62% / 47% 60% 40% 53%}
+  0%  {border-radius:72% 28% 56% 44% / 36% 64% 36% 64%}
+  25% {border-radius:38% 62% 30% 70% / 62% 34% 66% 38%}
+  50% {border-radius:64% 36% 74% 26% / 28% 70% 30% 72%}
+  75% {border-radius:30% 70% 44% 56% / 70% 26% 74% 30%}
+  100%{border-radius:56% 44% 34% 66% / 40% 72% 28% 60%}
 }
-@media(max-width:900px){.ad-photo{width:min(100%,460px)}}
+@media(max-width:900px){.ad-photo{width:min(100%,520px)}}
 
 .ad-kicker{font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint);margin-bottom:13px}
 .ad-chips{display:flex;flex-wrap:wrap;gap:9px}

@@ -729,16 +729,16 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 }
 .ad-feat p{color:var(--text-dim);font-size:.95rem;max-width:34ch}
 
-/* Árvore de peças — a moldura da lâmina de legislação */
-.ad-tree{position:relative;width:min(76%,320px);margin:clamp(28px,4vw,46px) 0 0;pointer-events:none}
+/* Fita de infinito — a moldura da lâmina de legislação */
+.ad-tree{position:relative;width:min(100%,360px);margin:clamp(28px,4vw,46px) 0 0;pointer-events:none}
 .ad-tree::before{
-  content:'';position:absolute;z-index:0;left:6%;right:6%;top:2%;bottom:18%;border-radius:50%;
+  content:'';position:absolute;z-index:0;left:6%;right:6%;top:10%;bottom:10%;border-radius:50%;
   background:radial-gradient(closest-side,rgba(110,183,235,.16),transparent 72%);filter:blur(18px);
 }
 .ad-tree img{
-  position:relative;z-index:1;display:block;width:100%;opacity:.95;
+  position:relative;z-index:1;display:block;width:100%;height:auto;opacity:.95;
   filter:drop-shadow(0 26px 44px rgba(0,0,0,.5));
-  animation:adSway 11s ease-in-out infinite;transform-origin:50% 92%;
+  animation:adSway 11s ease-in-out infinite;transform-origin:50% 50%;
 }
 @keyframes adSway{0%,100%{transform:rotate(-1.1deg)}50%{transform:rotate(1.1deg)}}
-@media(max-width:900px){.ad-tree{display:none}}
+@media(max-width:900px){.ad-tree{width:min(70%,280px);margin:0 auto clamp(20px,5vw,32px)}}

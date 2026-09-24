@@ -748,8 +748,8 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 .ls-eng{width:min(100%,420px);margin:clamp(28px,4vw,46px) 0 0;pointer-events:none}
 .ls-eng video{
   display:block;width:100%;height:auto;mix-blend-mode:screen;
-  -webkit-mask-image:radial-gradient(ellipse 70% 70% at center,#000 55%,transparent 100%);
-          mask-image:radial-gradient(ellipse 70% 70% at center,#000 55%,transparent 100%);
+  -webkit-mask-image:radial-gradient(closest-side,#000 40%,transparent 100%);
+          mask-image:radial-gradient(closest-side,#000 40%,transparent 100%);
 }
 @media(max-width:900px){.ls-eng{width:min(80%,320px);margin:0 auto clamp(20px,5vw,32px)}}
 @media(prefers-reduced-motion:reduce){.ls-eng{display:none}}

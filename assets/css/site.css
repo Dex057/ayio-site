@@ -671,20 +671,29 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 /* Bloco "o que é": texto + foto recortada dentro da roda da marca */
 .ad-intro{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.78fr);gap:clamp(34px,6vw,86px);align-items:center}
 @media(max-width:900px){.ad-intro{grid-template-columns:1fr;gap:clamp(40px,7vw,56px)}}
-.ad-photo{position:relative;justify-self:center;width:min(100%,468px);padding:8.5% 13%;margin:0}
-.ad-photo img{position:relative;z-index:1;width:100%;filter:drop-shadow(0 34px 64px rgba(0,0,0,.6))}
+.ad-photo{
+  --blob:58% 42% 47% 53% / 44% 52% 48% 56%;
+  position:relative;justify-self:center;width:min(100%,520px);margin:0;
+  padding:clamp(9px,1.7vw,16px);border-radius:var(--blob);
+  background:conic-gradient(from 195deg,
+    #1B54B8,#6EB7EB 14%,#3AAA35 32%,#F2B705 52%,#D32F2F 72%,#A783EB 88%,#1B54B8);
+  animation:adBlob 22s ease-in-out infinite alternate;
+}
+.ad-photo img{
+  position:relative;z-index:1;display:block;width:100%;aspect-ratio:31/19;object-fit:cover;
+  border-radius:var(--blob);filter:saturate(1.04);
+}
 .ad-photo__ring{
-  position:absolute;z-index:0;inset:0;border-radius:50%;
-  background:conic-gradient(from -20deg,
-    #1B54B8 0 16%,#D32F2F 22% 38%,#F2B705 44% 60%,#3AAA35 66% 82%,#1B54B8 88% 100%);
-  -webkit-mask:radial-gradient(closest-side,transparent 78%,#000 81%);
-          mask:radial-gradient(closest-side,transparent 78%,#000 81%);
-  opacity:.85;
+  position:absolute;z-index:0;inset:-3%;border-radius:inherit;
+  background:inherit;filter:blur(30px);opacity:.42;pointer-events:none;
+  animation:inherit;
 }
-.ad-photo__ring::after{
-  content:'';position:absolute;inset:0;border-radius:50%;
-  background:inherit;filter:blur(22px);opacity:.5;
+@keyframes adBlob{
+  0%  {border-radius:58% 42% 47% 53% / 44% 52% 48% 56%}
+  50% {border-radius:44% 56% 61% 39% / 55% 41% 59% 45%}
+  100%{border-radius:52% 48% 38% 62% / 47% 60% 40% 53%}
 }
+@media(max-width:900px){.ad-photo{width:min(100%,460px)}}
 
 .ad-kicker{font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint);margin-bottom:13px}
 .ad-chips{display:flex;flex-wrap:wrap;gap:9px}
@@ -700,8 +709,14 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 .ad-suite{position:relative;display:grid;grid-template-columns:minmax(0,.66fr) minmax(0,1.34fr);gap:clamp(30px,5vw,74px);align-items:center}
 @media(max-width:980px){.ad-suite{grid-template-columns:1fr;gap:clamp(34px,6vw,48px)}}
 .ad-wave{position:absolute;z-index:0;left:-6%;right:-6%;top:50%;translate:0 -50%;width:112%;height:auto;pointer-events:none}
-.ad-bot{position:relative;z-index:1;justify-self:center;width:min(100%,330px);margin:0}
-.ad-bot img{width:100%;filter:drop-shadow(0 30px 58px rgba(0,0,0,.5))}
+.ad-bot{position:relative;z-index:1;justify-self:center;width:min(100%,430px);margin:0}
+.ad-bot img{
+  display:block;width:100%;
+  filter:drop-shadow(0 38px 46px rgba(0,0,0,.55)) drop-shadow(0 0 60px rgba(95,196,238,.18));
+  animation:adFloat 7s ease-in-out infinite;
+}
+@keyframes adFloat{0%,100%{transform:translateY(-10px)}50%{transform:translateY(10px)}}
+@media(max-width:980px){.ad-bot{width:min(78%,360px)}}
 .ad-feat{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,40px)}
 @media(max-width:700px){.ad-feat{grid-template-columns:1fr;gap:26px}}
 .ad-feat li{display:grid;justify-items:start;gap:11px}
@@ -712,6 +727,16 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 }
 .ad-feat p{color:var(--text-dim);font-size:.95rem;max-width:34ch}
 
-/* Cápsulas soltas — a moldura da lâmina de legislação */
-.ad-caps{width:min(64%,220px);margin-top:clamp(28px,4vw,46px);opacity:.55;pointer-events:none}
-@media(max-width:900px){.ad-caps{display:none}}
+/* Árvore de peças — a moldura da lâmina de legislação */
+.ad-tree{position:relative;width:min(76%,320px);margin:clamp(28px,4vw,46px) 0 0;pointer-events:none}
+.ad-tree::before{
+  content:'';position:absolute;z-index:0;left:6%;right:6%;top:2%;bottom:18%;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(110,183,235,.16),transparent 72%);filter:blur(18px);
+}
+.ad-tree img{
+  position:relative;z-index:1;display:block;width:100%;opacity:.95;
+  filter:drop-shadow(0 26px 44px rgba(0,0,0,.5));
+  animation:adSway 11s ease-in-out infinite;transform-origin:50% 92%;
+}
+@keyframes adSway{0%,100%{transform:rotate(-1.1deg)}50%{transform:rotate(1.1deg)}}
+@media(max-width:900px){.ad-tree{display:none}}

@@ -571,6 +571,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 .p-hero__bg{position:absolute;inset:0;z-index:0}
 .p-hero__inner{position:relative;z-index:2}
 .p-hero__logo{max-width:min(78vw,440px);margin-bottom:clamp(26px,4vw,44px)}
+.p-hero__logo--lg{max-width:min(92vw,640px)}
 .crumb{display:flex;align-items:center;gap:10px;margin-bottom:26px;font-family:ui-monospace,monospace;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-faint)}
 .crumb a:hover{color:var(--accent)}
 

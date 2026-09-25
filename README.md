@@ -108,5 +108,5 @@ em telas de toque.
 
 ## Contato publicado no site
 
-Site `ayio.com.br` · E-mail `administrador@ayio.com.br` · WhatsApp `(11) 97179-7155`
+Site `ayio.com.br` · E-mail `comercial@ayio.com.br` · WhatsApp `(11) 97179-7155`
 (extraídos da última página de `ref/Licensys.pdf`).

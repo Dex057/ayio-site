@@ -531,16 +531,18 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 @media(max-width:820px){.step{grid-template-columns:auto 1fr}.step p{grid-column:2}}
 
 /* ---------- Contato ---------- */
-.contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line)}
-@media(max-width:1100px){.contact-grid{grid-template-columns:repeat(2,1fr)}}
+/* cada coluna tem no mínimo a largura do próprio texto: o e-mail nunca quebra */
+.contact-grid{display:grid;grid-template-columns:repeat(4,minmax(max-content,1fr));gap:2px;background:var(--line)}
+@media(max-width:1100px){.contact-grid{grid-template-columns:repeat(2,minmax(max-content,1fr))}}
 @media(max-width:820px){.contact-grid{grid-template-columns:1fr}}
 .contact-cell{
-  background:var(--ink);padding:clamp(24px,3vw,40px);
+  background:var(--ink);padding:clamp(30px,3.4vw,52px) clamp(24px,2.6vw,44px);
+  display:flex;flex-direction:column;justify-content:center;
   transition:background .5s var(--ease);
 }
 .contact-cell:hover{background:var(--surface)}
-.contact-cell .k{font-family:var(--display);font-weight:500;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint);display:block;margin-bottom:12px}
-.contact-cell .v{font-family:var(--display);font-size:clamp(1rem,1.7vw,1.3rem);font-weight:500;letter-spacing:-.02em;word-break:break-word}
+.contact-cell .k{font-family:var(--display);font-weight:500;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint);display:block;margin-bottom:14px}
+.contact-cell .v{font-family:var(--display);font-size:clamp(1rem,1.5vw,1.2rem);font-weight:500;letter-spacing:-.02em;white-space:nowrap}
 .contact-cell a.v:hover{color:var(--accent)}
 
 /* Retrato emoldurado (Quem somos) */
@@ -755,10 +757,11 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
           mask-image:radial-gradient(closest-side,#000 40%,transparent 100%);
 }
 /* Fundo não-preto (ex.: tint--sc): o screen clareia as sombras e lava o vídeo, então mistura normal + miolo maior */
+.split-video--solid{width:min(100%,470px)}
 .split-video--solid video{
-  mix-blend-mode:normal;filter:contrast(1.12) saturate(1.1);
-  -webkit-mask-image:radial-gradient(closest-side,#000 58%,transparent 100%);
-          mask-image:radial-gradient(closest-side,#000 58%,transparent 100%);
+  mix-blend-mode:normal;filter:brightness(.9) saturate(1.05);
+  -webkit-mask-image:radial-gradient(closest-side,#000 66%,transparent 100%);
+          mask-image:radial-gradient(closest-side,#000 66%,transparent 100%);
 }
 @media(max-width:900px){.split-video{width:min(80%,320px);margin:0 auto clamp(20px,5vw,32px)}}
 @media(prefers-reduced-motion:reduce){.split-video{display:none}}

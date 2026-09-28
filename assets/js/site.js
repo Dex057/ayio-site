@@ -65,7 +65,7 @@
       requestAnimationFrame(loop);
     })();
 
-    const hot = 'a,button,.card,.stack__card,.acc__btn,.feats li,input,textarea';
+    const hot = 'a,button,.card,.acc__btn,.feats li,input,textarea';
     document.addEventListener('mouseover', e => { if (e.target.closest(hot)) ring.classList.add('grow'); });
     document.addEventListener('mouseout',  e => { if (e.target.closest(hot)) ring.classList.remove('grow'); });
   }
@@ -267,128 +267,48 @@
   }
 
   /* ---------------------------------------------------------
-     10. Cards empilhados + demos vivas dos produtos (GSAP ScrollTrigger)
+     10. Produtos: narrativa na rolagem
+     A rolagem dentro da trilha vira uma etapa de 0 a 8; o CSS faz o resto.
      --------------------------------------------------------- */
+  function story() {
+    const el = $('.story');
+    if (!el) return;
+    const stepPx = () => (el.offsetHeight - innerHeight) / 8;
+    let cur = -1;
+    const set = i => {
+      if (i === cur) return;
+      cur = i;
+      el.dataset.p = Math.floor(i / 3);
+      el.dataset.s = i % 3;
+    };
+    const upd = () => {
+      const st = stepPx();
+      if (st > 0) set(Math.max(0, Math.min(8, Math.round(-el.getBoundingClientRect().top / st))));
+    };
+    addEventListener('scroll', upd, { passive: true });
+    addEventListener('resize', upd);
+    upd();
 
-  // Janela de scroll em que a demo roda.
-  // No desktop ela acontece na ENTRADA do card, terminando pouco antes de ele
-  // encostar no topo — dali em diante o próximo card já começa a cobri-lo, e
-  // uma demo rodando embaixo de outro card é história contada pela metade.
-  // No mobile não há empilhamento: a janela é a passagem do card pela tela.
-  const demoST = (item, pinned) => pinned
-    ? { trigger: item, start: 'top 85%', end: 'top 12%',    scrub: .8 }
-    : { trigger: item, start: 'top 80%', end: 'bottom 65%', scrub: .8 };
+    // Etapas e trilho levam a rolagem até a etapa clicada.
+    $$('[data-go]', el).forEach(b => b.addEventListener('click', () => {
+      const y = el.getBoundingClientRect().top + scrollY + +b.dataset.go * stepPx();
+      window.__ayioScrollTo ? window.__ayioScrollTo(y) : scrollTo({ top: y, behavior: reduced ? 'auto' : 'smooth' });
+    }));
 
-  function buildDemo(item, gsap, pinned) {
-    const demo = $('[data-demo]', item);
-    if (!demo) return;
-    const tl = gsap.timeline({ scrollTrigger: demoST(item, pinned) });
+    // LicenSys: clicar numa barra mostra o detalhe do título.
+    const info = $('.sd__info', el);
+    $$('.sd__bars button', el).forEach(b => b.addEventListener('click', () => {
+      $$('.sd__bars button', el).forEach(x => x.classList.toggle('is-on', x === b));
+      info.innerHTML = `<b>${$('b', b).textContent}</b> · ${b.dataset.info}`;
+    }));
 
-    switch (demo.dataset.demo) {
-
-      // Seu Cartório — a pergunta chega, a IA "digita", a resposta se monta.
-      case 'chat': {
-        const bubs = $$('.bub', demo);
-        gsap.set(bubs, { opacity: 0, y: 16 });
-        bubs.forEach((b, i) => {
-          const at = i * .6;
-          tl.to(b, { opacity: 1, y: 0, duration: .5, ease: 'power2.out' }, at);
-          // o "digitando" colapsa quando a resposta chega (-9px zera o gap do flex)
-          if (b.classList.contains('bub--dots')) {
-            tl.to(b, { opacity: 0, height: 0, paddingTop: 0, paddingBottom: 0, marginBottom: -9, duration: .3 }, at + .85);
-          }
-        });
-        break;
-      }
-
-      // LicenSys — as barras de prazo enchem e o alerta preventivo acende.
-      case 'prazos': {
-        const rows = $$('.rw', demo), alerta = $('.demo__alert', demo);
-        gsap.set(rows, { opacity: 0, x: -18 });
-        gsap.set($$('.rw s em', demo), { width: 0 });
-        rows.forEach((r, i) => {
-          const at = i * .38;
-          tl.to(r, { opacity: 1, x: 0, duration: .45, ease: 'power2.out' }, at)
-            .to($('s em', r), { width: r.style.getPropertyValue('--w') || '50%', duration: .75, ease: 'power2.out' }, at + .18);
-        });
-        if (alerta) {
-          gsap.set(alerta, { opacity: 0, y: 14 });
-          tl.to(alerta, { opacity: 1, y: 0, duration: .5, ease: 'power3.out' }, '>-.2');
-        }
-        break;
-      }
-
-      // AdaptAI — a página densa se reescreve como página adaptada.
-      case 'adapta': {
-        const src   = $('.pg--src', demo), out = $('.pg--out', demo);
-        const seta  = $('.pg__ar', demo);
-        const denso = $$('.pg--src > *', demo);
-        const pic   = $$('.pg__pic i', demo), txt = $('.pg__txt', demo);
-        const largo = $$('.pg__l--big', demo);
-        const chips = $$('.doc__chips span', demo);
-
-        gsap.set([src, out], { opacity: 0, y: 10 });
-        gsap.set([denso, largo], { scaleX: 0, transformOrigin: '0 50%' });
-        gsap.set(seta, { opacity: 0, x: -6 });
-        gsap.set(pic, { opacity: 0, scale: .7 });
-        gsap.set(txt, { clipPath: 'inset(0 100% 0 0)' });
-        gsap.set(chips, { opacity: 0, y: 8 });
-
-        tl.to(src,   { opacity: 1, y: 0, duration: .35, ease: 'power2.out' }, 0)
-          .to(denso, { scaleX: 1, duration: .3, stagger: .045, ease: 'power2.out' }, .1)
-          .to(seta,  { opacity: .8, x: 0, duration: .35, ease: 'back.out(2)' }, .7)
-          .to(out,   { opacity: 1, y: 0, duration: .4, ease: 'power2.out' }, .85)
-          .to(pic,   { opacity: 1, scale: 1, duration: .4, stagger: .1, ease: 'back.out(1.8)' }, 1)
-          .to(txt,   { clipPath: 'inset(0 0% 0 0)', duration: .6, ease: 'power2.inOut' }, 1.15)
-          .to(largo, { scaleX: 1, duration: .35, stagger: .12, ease: 'power2.out' }, 1.5)
-          .to(chips, { opacity: 1, y: 0, duration: .35, stagger: .1, ease: 'power2.out' }, 1.8);
-        break;
-      }
-    }
-  }
-
-  function stackCards() {
-    const items = $$('.stack__item');
-    if (!items.length) return;
-
-    const gsap = window.gsap, ST = window.ScrollTrigger;
-    // Sem GSAP (ou com movimento reduzido) o CSS já entrega o estado final:
-    // demos montadas e cards em fluxo normal. Não há nada a degradar.
-    if (!gsap || !ST || reduced) return;
-    gsap.registerPlugin(ST);
-
-    const mm = gsap.matchMedia();
-
-    // Abaixo de 980px o sticky é desligado no CSS: só as demos rodam.
-    mm.add('(max-width:980px)', () => {
-      items.forEach(item => buildDemo(item, gsap, false));
-    });
-
-    mm.add('(min-width:981px)', () => {
-      items.forEach((item, i) => {
-        buildDemo(item, gsap, true);
-
-        // Encolhe e escurece enquanto o próximo card cobre este.
-        const card = $('.stack__card', item);
-        if (card && items[i + 1]) {
-          // fromTo, e não to: o filter do card é `none`, e o GSAP lê `none`
-          // como brightness(0) — sem o estado inicial explícito o card entra preto.
-          gsap.fromTo(card,
-            { filter: 'brightness(1)' },
-            {
-              scale: .925, y: -26, filter: 'brightness(.66)', ease: 'none',
-              scrollTrigger: { trigger: item, start: 'top top', end: '+=100%', scrub: true }
-            });
-        }
-
-        // Numeral 01/02/03 em parallax.
-        const idx = $('.prod__idx', item);
-        if (idx) gsap.to(idx, {
-          yPercent: -20, ease: 'none',
-          scrollTrigger: { trigger: item, start: 'top bottom', end: 'bottom top', scrub: true }
-        });
-      });
-    });
+    // AdaptAI: cada chip liga ou desliga uma adaptação do material.
+    const adapt = $('.sd__adapt', el);
+    $$('[data-ad]', el).forEach(b => b.addEventListener('click', () => {
+      const on = b.getAttribute('aria-pressed') !== 'true';
+      b.setAttribute('aria-pressed', on);
+      adapt.classList.toggle('is-' + b.dataset.ad, on);
+    }));
   }
 
   /* ---------------------------------------------------------
@@ -570,7 +490,7 @@
     counters();
     accentShift();
     parallax();
-    stackCards();
+    story();
     magnetic();
     accordion();
     chatDemo();

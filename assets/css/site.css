@@ -332,14 +332,6 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 .card p{color:var(--text-dim);font-size:.96rem}
 .card__icon{width:44px;height:44px;margin-bottom:22px;color:var(--accent)}
 
-/* Cards de clientes: centralizados, com monograma */
-.card--client{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;min-height:168px}
-.card--client .mono-badge{
-  width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:0 0 auto;
-  background:var(--accent);color:var(--ink);font-family:var(--display);font-weight:700;font-size:1.05rem;
-}
-.card--client p{color:var(--text);font-size:.98rem;font-weight:500;line-height:1.4;max-width:32ch}
-
 /* Cards de feedback/depoimento */
 .card--quote{display:flex;flex-direction:column;gap:22px;justify-content:space-between}
 .card--quote::after{
@@ -759,3 +751,99 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 }
 @media(max-width:900px){.split-video{width:min(80%,320px);margin:0 auto clamp(20px,5vw,32px)}}
 @media(prefers-reduced-motion:reduce){.split-video{display:none}}
+
+/* ---------- Mapa de presença (Seu Cartório) ----------
+   Contornos reais dos 27 estados. Os estados atendidos acendem no accent
+   do produto; a intensidade (--i, 0→1) vem do nº de cartórios naquele UF. */
+.mapa{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:clamp(20px,2.6vw,34px);align-items:start}
+@media(max-width:980px){.mapa{grid-template-columns:1fr}}
+
+.mapa__palco{
+  position:relative;border:1px solid var(--line);border-radius:var(--rad-lg);
+  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
+  padding:clamp(18px,2.4vw,32px);
+}
+.mapa__svg{width:100%;max-width:720px;margin-inline:auto;display:block;overflow:visible}
+
+.mapa__uf{
+  fill:rgba(255,255,255,.045);stroke:rgba(255,255,255,.14);stroke-width:.8;
+  transition:fill .35s var(--ease),stroke .35s var(--ease),filter .25s;
+}
+.mapa__uf.is-on{
+  fill:color-mix(in srgb,var(--accent) calc(24% + var(--i,0) * 52%),transparent);
+  stroke:var(--accent);stroke-width:1.4;cursor:pointer;
+}
+.mapa__uf.is-on:hover,.mapa__uf.is-on:focus-visible{filter:brightness(1.3);outline:none}
+.mapa__uf.is-sel{stroke:var(--text);stroke-width:2.4}
+
+.mapa__rotulo{pointer-events:none}
+.mapa__sigla{
+  font-family:var(--display);font-weight:600;fill:var(--text-faint);
+  paint-order:stroke;stroke:rgba(0,0,0,.45);stroke-width:2.5;
+}
+.mapa__rotulo.is-on .mapa__sigla{fill:#fff;font-weight:700}
+.mapa__qtd{font-family:var(--body);font-weight:600;fill:rgba(255,255,255,.92);paint-order:stroke;stroke:rgba(0,0,0,.5);stroke-width:2.5}
+.mapa__pulso{fill:var(--accent);animation:mapaPulso 2s var(--ease-io) infinite}
+@keyframes mapaPulso{0%,100%{opacity:.95}50%{opacity:.2}}
+
+.mapa__tip{
+  position:absolute;top:clamp(14px,2vw,24px);left:clamp(14px,2vw,24px);z-index:2;
+  display:grid;gap:2px;padding:10px 15px;border-radius:14px;pointer-events:none;
+  border:1px solid var(--line-strong);background:rgba(8,12,26,.92);backdrop-filter:blur(8px);
+  opacity:0;transform:translateY(-4px);transition:opacity .25s,transform .25s var(--ease);
+}
+.mapa__tip.is-on{opacity:1;transform:none}
+.mapa__tip b{font-family:var(--display);font-weight:600;font-size:.92rem;letter-spacing:-.02em}
+.mapa__tip span{font-size:.76rem;color:var(--text-dim)}
+
+.mapa__legenda{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;
+  margin-top:clamp(14px,2vw,22px);font-size:.73rem;color:var(--text-faint);
+}
+.mapa__legenda span{display:inline-flex;align-items:center;gap:7px}
+.mapa__chip{width:12px;height:12px;border-radius:4px;display:inline-block;flex:0 0 auto}
+.mapa__chip--off{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.14)}
+.mapa__chip--min{background:color-mix(in srgb,var(--accent) 24%,transparent);border:1px solid var(--accent)}
+.mapa__chip--max{background:var(--accent)}
+
+/* Painel lateral: ranking dos estados ↔ cartórios do estado clicado */
+.mapa__box{
+  border:1px solid var(--line);border-radius:var(--rad-lg);
+  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
+  padding:clamp(20px,2.4vw,28px);
+}
+.mapa__box-topo{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.mapa__box-tit{font-family:var(--display);font-weight:600;font-size:1.02rem;letter-spacing:-.025em}
+.mapa__box-sub{margin-top:6px;font-size:.78rem;color:var(--accent);font-weight:600}
+.mapa__fechar{font-size:1.5rem;line-height:1;color:var(--text-faint);transition:color .3s}
+.mapa__fechar:hover{color:var(--text)}
+
+.mapa__rank{margin-top:16px;display:grid;gap:2px}
+.mapa__rank button{
+  width:100%;display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:12px;
+  text-align:left;padding:9px 10px;border-radius:12px;font-size:.87rem;
+  transition:background .3s;
+}
+.mapa__rank button:hover{background:rgba(255,255,255,.05)}
+.mapa__rank .uf{font-family:ui-monospace,monospace;font-weight:700;font-size:.78rem;letter-spacing:.06em;color:var(--text)}
+.mapa__rank .nome{color:var(--text-dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mapa__rank .n{font-family:var(--display);font-weight:700;color:var(--accent)}
+
+.mapa__lista{margin-top:16px;display:grid;gap:14px}
+.mapa__lista li{display:grid;gap:3px;padding-left:16px;position:relative}
+.mapa__lista li::before{content:'';position:absolute;left:0;top:.52em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.mapa__lista .n{font-size:.9rem;font-weight:500;line-height:1.4}
+.mapa__lista .c{font-size:.76rem;color:var(--text-faint)}
+
+.mapa__nota{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:.75rem;color:var(--text-faint)}
+
+/* Placar acima do mapa */
+.mapa__placar{display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,56px)}
+.mapa__placar div{display:grid;gap:4px}
+.mapa__placar .n{
+  font-family:var(--display);font-size:clamp(2rem,4vw,2.9rem);font-weight:600;letter-spacing:-.04em;line-height:1;
+  background:linear-gradient(120deg,var(--grad-a),var(--grad-b));-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.mapa__placar .l{font-size:.78rem;color:var(--text-dim)}
+
+@media(prefers-reduced-motion:reduce){.mapa__pulso{animation:none;opacity:.9}}

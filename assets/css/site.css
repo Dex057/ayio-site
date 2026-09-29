@@ -295,6 +295,105 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 .media--frame{border:1px solid var(--line);padding:10px}
 .media--frame img{border-radius:14px}
 
+/* ---------- Captura de tela dos produtos ----------
+   A tela de um produto é uma imagem densa e clara caindo dentro de uma
+   página escura: sem moldura ela flutua e o olho não sabe onde começa o
+   software. A janela resolve isso — barra, cantos e sombra dizem "isto é
+   a tela real do sistema" antes de qualquer legenda. O accent da seção
+   pinta o halo, então cada produto herda a própria cor. */
+.appshot{margin:0}
+.appshot__win{
+  position:relative;border-radius:18px;overflow:hidden;
+  border:1px solid var(--line-strong);
+  background:linear-gradient(180deg,var(--surface-2),var(--surface));
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset,
+             0 30px 70px -30px rgba(0,0,0,.85),
+             0 0 0 1px rgba(0,0,0,.4);
+  transition:transform .6s var(--ease),box-shadow .6s var(--ease)
+}
+.appshot__win::after{
+  content:'';position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+  box-shadow:0 0 90px -20px var(--glow);opacity:.9;transition:opacity .6s var(--ease)
+}
+.appshot__bar{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 16px;border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,.035)
+}
+.appshot__dots{display:flex;gap:6px;flex:0 0 auto}
+.appshot__dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18)}
+.appshot__tag{
+  font-family:var(--display);font-weight:500;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.appshot__view{
+  display:block;width:100%;position:relative;padding:0;border:0;
+  background:var(--ink-2);cursor:zoom-in;line-height:0
+}
+.appshot__view img{width:100%;height:auto}
+.appshot__hint{
+  position:absolute;right:14px;bottom:14px;z-index:2;
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 14px;border-radius:999px;
+  border:1px solid var(--fill-edge);background:rgba(5,7,15,.72);
+  backdrop-filter:blur(10px);
+  font-size:12px;letter-spacing:.02em;color:var(--text);
+  opacity:0;transform:translateY(6px);transition:opacity .35s var(--ease),transform .35s var(--ease)
+}
+.appshot__hint::before{content:'⤢';font-size:13px;line-height:1}
+.appshot__view:hover .appshot__hint,
+.appshot__view:focus-visible .appshot__hint{opacity:1;transform:none}
+.appshot__win:hover{transform:translateY(-4px)}
+.appshot__win:hover::after{opacity:1}
+.appshot__cap{
+  margin-top:18px;max-width:78ch;
+  font-size:clamp(13px,1.05vw,14.5px);line-height:1.65;color:var(--text-dim)
+}
+.appshot__cap b{color:var(--text);font-weight:600}
+@media(max-width:700px){
+  .appshot__win{border-radius:14px}
+  .appshot__bar{padding:8px 11px}
+  .appshot__tag{font-size:9.5px;letter-spacing:.1em}
+  /* No celular a tela do produto cabe em ~350px e nenhum rótulo é legível:
+     a pílula fica visível o tempo todo, porque ampliar deixa de ser um extra
+     e passa a ser a única forma de ler a captura. */
+  .appshot__hint{opacity:1;transform:none;right:8px;bottom:8px;padding:5px 10px;font-size:10.5px;gap:5px}
+}
+
+/* Lightbox — a captura a 100%, sem a página competindo por atenção */
+.lightbox{
+  position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;
+  padding:clamp(16px,4vw,48px);
+  background:rgba(3,5,12,.9);backdrop-filter:blur(14px);
+  opacity:0;pointer-events:none;transition:opacity .35s var(--ease)
+}
+.lightbox.open{opacity:1;pointer-events:auto}
+.lightbox img{
+  max-width:100%;max-height:100%;width:auto;border-radius:12px;
+  border:1px solid var(--line-strong);box-shadow:0 40px 90px -30px rgba(0,0,0,.9);
+  transform:scale(.97);transition:transform .35s var(--ease)
+}
+.lightbox.open img{transform:none}
+.lightbox__close{
+  position:absolute;top:clamp(12px,2.4vw,26px);right:clamp(12px,2.4vw,26px);
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line-strong);background:rgba(255,255,255,.06);
+  color:var(--text);font-size:19px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .3s var(--ease),transform .3s var(--ease)
+}
+.lightbox__close:hover{background:rgba(255,255,255,.14);transform:rotate(90deg)}
+/* Numa tela estreita, caber inteira é o mesmo que continuar ilegível: aqui a
+   imagem vai para uma largura de leitura e quem quiser lê arrastando. */
+@media(max-width:700px){
+  /* flex-start nos dois eixos: com justify-content:center o que transborda
+     à esquerda fica inalcançável pelo scroll. */
+  .lightbox{align-items:flex-start;justify-content:flex-start;overflow:auto;padding:56px 12px 24px;-webkit-overflow-scrolling:touch}
+  .lightbox img{max-width:none;max-height:none;width:860px}
+  .lightbox__close{position:fixed}
+}
+
 /* ---------- Marquee ---------- */
 .marquee{
   position:relative;display:flex;overflow:hidden;gap:0;

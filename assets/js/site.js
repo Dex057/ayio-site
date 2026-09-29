@@ -542,7 +542,56 @@
   }
 
   /* ---------------------------------------------------------
-     16. Ano no rodapé
+     16. Lightbox das capturas de tela
+     A tela de um produto é densa: no fluxo da página ela cabe em ~1200px
+     e os rótulos ficam pequenos. O clique abre a mesma imagem em cima de
+     tudo, sem trocar de página nem carregar arquivo novo.
+     --------------------------------------------------------- */
+  function lightbox() {
+    const triggers = $$('[data-zoom]');
+    if (!triggers.length) return;
+
+    const box = document.createElement('div');
+    box.className = 'lightbox';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.hidden = true;
+    box.innerHTML = '<button class="lightbox__close" type="button" aria-label="Fechar">✕</button><img alt="">';
+    document.body.appendChild(box);
+
+    const img = $('img', box);
+    const closeBtn = $('.lightbox__close', box);
+    let opener = null;
+
+    const close = () => {
+      box.classList.remove('open');
+      document.documentElement.style.overflow = '';
+      setTimeout(() => { box.hidden = true; }, reduced ? 0 : 350);
+      if (opener) opener.focus();
+    };
+
+    const open = trigger => {
+      const src = $('img', trigger);
+      if (!src) return;
+      opener = trigger;
+      img.src = src.currentSrc || src.src;
+      img.alt = src.alt;
+      box.hidden = false;
+      document.documentElement.style.overflow = 'hidden';
+      requestAnimationFrame(() => box.classList.add('open'));
+      closeBtn.focus();
+    };
+
+    triggers.forEach(t => t.addEventListener('click', () => open(t)));
+    closeBtn.addEventListener('click', close);
+    box.addEventListener('click', e => { if (e.target !== img) close(); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && box.classList.contains('open')) close();
+    });
+  }
+
+  /* ---------------------------------------------------------
+     17. Ano no rodapé
      --------------------------------------------------------- */
   function year() { $$('[data-year]').forEach(e => e.textContent = new Date().getFullYear()); }
 
@@ -577,6 +626,7 @@
     waveform();
     network($('.hero__canvas'));
     network($('.p-hero__canvas'));
+    lightbox();
     year();
     start();
   });

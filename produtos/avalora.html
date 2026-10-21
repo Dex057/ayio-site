@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/site.css?v=12">
+<link rel="stylesheet" href="../assets/css/site.css?v=14">
 </head>
 <body class="theme-av">
 
@@ -138,32 +138,44 @@
     <h2 class="h-lg mb-l" data-split>Da oferta anunciada ao lançamento do imposto.</h2>
     <div class="flow" data-rise>
       <div class="flow__step">
-        <span class="k">01 · Captura</span>
+        <span class="flow__node" aria-hidden="true"></span>
+        <span class="flow__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.4"/><path d="M12 4.6a7.4 7.4 0 0 1 7.4 7.4M12 8.2a3.8 3.8 0 0 1 3.8 3.8"/><path d="M4.6 12A7.4 7.4 0 0 0 12 19.4"/></svg>Agente</span>
+        <span class="flow__k">01 · Captura</span>
         <h3>O agente trabalha de madrugada</h3>
         <p>Portais de anúncio, transações do próprio ITBI, feeds de imobiliárias e planilhas. Cada registro vira amostra com tipologia, área, localização, preço, data e histórico de remarcação.</p>
       </div>
       <div class="flow__step">
-        <span class="k">02 · Curadoria</span>
+        <span class="flow__node" aria-hidden="true"></span>
+        <span class="flow__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.6 12S6 6.2 12 6.2 21.4 12 21.4 12 18 17.8 12 17.8 2.6 12 2.6 12Z"/><circle cx="12" cy="12" r="2.6"/></svg>Curador</span>
+        <span class="flow__k">02 · Curadoria</span>
         <h3>O duvidoso vai para quarentena</h3>
         <p>Preço muito fora da mediana do bairro, dado faltando, possível duplicata: o curador decide. O resto fica ativo, com um score de qualidade de 0 a 1.</p>
       </div>
       <div class="flow__step">
-        <span class="k">03 · Solicitação</span>
+        <span class="flow__node" aria-hidden="true"></span>
+        <span class="flow__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h12.5M13.5 5l3 3-3 3"/><path d="M20 16H7.5M10.5 13l-3 3 3 3"/></svg>Sistema</span>
+        <span class="flow__k">03 · Solicitação</span>
         <h3>A guia chega e é distribuída</h3>
         <p>Por integração com o sistema tributário, por lote CSV ou digitada. O sistema localiza o imóvel, pré-seleciona os comparáveis e entrega ao avaliador com menos trabalho em aberto.</p>
       </div>
       <div class="flow__step">
-        <span class="k">04 · Avaliação</span>
+        <span class="flow__node" aria-hidden="true"></span>
+        <span class="flow__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 14.5 10 9l3 3 6.5-6.5"/><path d="M15 5.5h4.5V10"/><path d="M4.5 19.5h15"/></svg>Avaliador</span>
+        <span class="flow__k">04 · Avaliação</span>
         <h3>O avaliador decide, o motor calcula</h3>
         <p>Raio, área e período se ajustam na tela; amostras podem ser excluídas com justificativa registrada. O valor final é arbitrado dentro do campo de arbítrio permitido.</p>
       </div>
       <div class="flow__step">
-        <span class="k">05 · Homologação</span>
+        <span class="flow__node" aria-hidden="true"></span>
+        <span class="flow__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 19 6v5.4c0 4-2.9 7.4-7 8.4-4.1-1-7-4.4-7-8.4V6Z"/><path d="m9.2 11.8 2 2 3.6-3.8"/></svg>Supervisor</span>
+        <span class="flow__k">05 · Homologação</span>
         <h3>O supervisor assina</h3>
         <p>Alertas, devolução com motivo ou homologação. Na homologação sai o laudo em PDF com assinatura PAdES ICP-Brasil, código de verificação público e despacho de lançamento.</p>
       </div>
       <div class="flow__step">
-        <span class="k">06 · Devolução</span>
+        <span class="flow__node" aria-hidden="true"></span>
+        <span class="flow__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h12.5M13.5 5l3 3-3 3"/><path d="M20 16H7.5M10.5 13l-3 3 3 3"/></svg>Sistema</span>
+        <span class="flow__k">06 · Devolução</span>
         <h3>O resultado volta ao tributário</h3>
         <p>Valor, graus NBR e URL do laudo seguem para o sistema tributário por API, com reenvio automático em caso de falha. O contribuinte verifica e, se discordar, contesta.</p>
       </div>
@@ -596,11 +608,22 @@
       </figcaption>
     </figure>
 
-    <div class="grid g-4 mt-l">
-      <article class="card" data-rise><span class="card__num">Regressão</span><h3 class="h-sm">O método formal</h3><p>OLS sobre ln(R$/m²), com eliminação regressiva, VIF, Shapiro, resíduos e intervalo de predição.</p></article>
-      <article class="card" data-rise data-d="1"><span class="card__num">KNN espacial</span><h3 class="h-sm">A vizinhança</h3><p>Média ponderada por distância, similaridade e qualidade das amostras mais próximas.</p></article>
-      <article class="card" data-rise data-d="2"><span class="card__num">Random Forest</span><h3 class="h-sm">A conferência</h3><p>Modelo de apoio com validação cruzada e semente fixa, para checar se a regressão não se perdeu.</p></article>
-      <article class="card" data-rise data-d="3"><span class="card__num">Gradient Boosting</span><h3 class="h-sm">O contraste</h3><p>Quarta leitura do mesmo conjunto. Divergência grande entre métodos é sinal de que a base precisa de atenção.</p></article>
+    <div class="methods mt-l">
+      <article class="methods__main" data-rise>
+        <span class="methods__tag">Método formal · NBR 14.653-2</span>
+        <h3 class="h-sm">Regressão linear sobre ln(R$/m²)</h3>
+        <p>É ela que fundamenta o laudo. Mínimos quadrados com eliminação regressiva das variáveis sem significância, intervalo de predição e os diagnósticos que a norma cobra — daí saem o grau de fundamentação e o de precisão.</p>
+        <ul class="methods__chips">
+          <li>Eliminação regressiva</li><li>VIF</li><li>Shapiro</li><li>Resíduos</li><li>Extrapolação</li><li>IC de predição</li>
+        </ul>
+      </article>
+      <div class="methods__aux">
+        <p class="methods__lbl" data-rise>Três leituras de conferência</p>
+        <article data-rise><h4>KNN espacial</h4><p>Média ponderada por distância, similaridade e qualidade das amostras mais próximas.</p></article>
+        <article data-rise data-d="1"><h4>Random Forest</h4><p>Validação cruzada e semente fixa: confere se a regressão não se perdeu.</p></article>
+        <article data-rise data-d="2"><h4>Gradient Boosting</h4><p>Quarta leitura do mesmo conjunto, pelo caminho oposto.</p></article>
+        <p class="methods__note" data-rise>Os quatro aparecem lado a lado na tela de resultado. <b>Divergência grande entre eles é sinal de base com problema</b>, não de valor difícil.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -662,11 +685,27 @@
         omitidos</b> e nenhuma coordenada de imóvel. Serve de dado aberto para imprensa, universidade e Câmara.
       </figcaption>
     </figure>
-    <div class="grid g-4">
-      <article class="card" data-rise><span class="card__num">01</span><h3 class="h-sm">Valor de referência</h3><p>Antes de declarar, o cidadão consulta a mediana do bairro por inscrição ou por características.</p></article>
-      <article class="card" data-rise data-d="1"><span class="card__num">02</span><h3 class="h-sm">Verificação do laudo</h3><p>O código impresso no PDF abre a página pública: número, data, valor, graus, assinatura e hash do arquivo.</p></article>
-      <article class="card" data-rise data-d="2"><span class="card__num">03</span><h3 class="h-sm">Contestação com prazo</h3><p>Justificativa e até cinco anexos geram protocolo, chave de acompanhamento e prazo de resposta.</p></article>
-      <article class="card" data-rise data-d="3"><span class="card__num">04</span><h3 class="h-sm">Observatório aberto</h3><p>Mediana, quartis, séries e mapa de calor por bairro, também disponíveis em JSON pela API.</p></article>
+    <div class="steps">
+      <div class="step" data-rise>
+        <span class="step__n">01</span>
+        <h3 class="h-sm">Valor de referência</h3>
+        <p class="small">Antes de declarar, o cidadão consulta a mediana do bairro pela inscrição imobiliária ou pelas características do imóvel. Sem login, sem guardar dado nenhum dele.</p>
+      </div>
+      <div class="step" data-rise data-d="1">
+        <span class="step__n">02</span>
+        <h3 class="h-sm">Verificação do laudo</h3>
+        <p class="small">O código impresso no PDF abre a página pública: número, data, situação, valor, graus NBR, assinatura digital e hash do arquivo.</p>
+      </div>
+      <div class="step" data-rise data-d="2">
+        <span class="step__n">03</span>
+        <h3 class="h-sm">Contestação com prazo</h3>
+        <p class="small">Justificativa e até cinco anexos geram protocolo, chave de acompanhamento e prazo de resposta. O andamento e a fundamentação da decisão ficam abertos ao contribuinte.</p>
+      </div>
+      <div class="step" data-rise data-d="3">
+        <span class="step__n">04</span>
+        <h3 class="h-sm">Observatório aberto</h3>
+        <p class="small">Mediana, quartis, séries por tipologia e mapa de calor por bairro, na tela e em JSON pela API — dado aberto para imprensa, universidade e Câmara.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -676,16 +715,16 @@
   <div class="wrap">
     <p class="eyebrow mb-m" data-rise>Benefícios</p>
     <h2 class="h-lg mb-l" data-split>O que muda na receita e no contencioso.</h2>
-    <div class="grid g-4">
-      <article class="card" data-rise><h3 class="h-sm">Base de cálculo justa</h3><p>Subavaliação detectada com método, e não por suspeita.</p></article>
-      <article class="card" data-rise data-d="1"><h3 class="h-sm">Laudo que se sustenta</h3><p>Norma técnica, assinatura digital e cálculo reproduzível.</p></article>
-      <article class="card" data-rise data-d="2"><h3 class="h-sm">Menos contencioso</h3><p>Contraditório resolvido no próprio fluxo, antes do judiciário.</p></article>
-      <article class="card" data-rise data-d="3"><h3 class="h-sm">Avaliação em escala</h3><p>Comparáveis pré-selecionados e fila distribuída automaticamente.</p></article>
-      <article class="card" data-rise data-d="1"><h3 class="h-sm">Critérios publicados</h3><p>O que a LC 227/2026 exige divulgar já está no ar.</p></article>
-      <article class="card" data-rise data-d="2"><h3 class="h-sm">Prazo sob controle</h3><p>Data-limite por avaliação, aviso de vencimento e carga por avaliador.</p></article>
-      <article class="card" data-rise data-d="3"><h3 class="h-sm">Memória do mercado</h3><p>Histórico de preços, remarcações e tempo de exposição por bairro.</p></article>
-      <article class="card" data-rise data-d="4"><h3 class="h-sm">LGPD por desenho</h3><p>Sem dado pessoal do contribuinte no cálculo, com retenção e expurgo automáticos.</p></article>
-    </div>
+    <ul class="gains" data-rise>
+      <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.4 8.6 3 3 6.2-7"/></svg><b>Base de cálculo justa</b><span>Subavaliação detectada com método, não por suspeita.</span></li>
+      <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.4 8.6 3 3 6.2-7"/></svg><b>Laudo que se sustenta</b><span>Norma técnica, assinatura digital e cálculo reproduzível.</span></li>
+      <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.4 8.6 3 3 6.2-7"/></svg><b>Menos contencioso</b><span>Contraditório resolvido no fluxo, antes do judiciário.</span></li>
+      <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.4 8.6 3 3 6.2-7"/></svg><b>Avaliação em escala</b><span>Comparáveis pré-selecionados e fila distribuída sozinha.</span></li>
+      <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.4 8.6 3 3 6.2-7"/></svg><b>Critérios publicados</b><span>O que a LC 227/2026 manda divulgar já está no ar.</span></li>
+      <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.4 8.6 3 3 6.2-7"/></svg><b>Prazo sob controle</b><span>Data-limite por avaliação, aviso e carga por avaliador.</span></li>
+      <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.4 8.6 3 3 6.2-7"/></svg><b>Memória do mercado</b><span>Histórico de preços, remarcações e tempo de exposição.</span></li>
+      <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.4 8.6 3 3 6.2-7"/></svg><b>LGPD por desenho</b><span>Sem dado pessoal no cálculo; retenção e expurgo automáticos.</span></li>
+    </ul>
   </div>
 </section>
 

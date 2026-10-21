@@ -318,6 +318,30 @@
         break;
       }
 
+      // Avalora — as amostras do entorno aparecem e viram o valor arbitrado.
+      case 'valor': {
+        const pts = $$('.val__map i', demo), ring = $('.val__ring', demo), pin = $('.val__pin', demo);
+        const rows = $$('.val__row', demo), chips = $$('.val__chips span', demo);
+
+        gsap.set(pts, { opacity: 0, scale: .4 });
+        gsap.set(ring, { opacity: 0, scale: .8, transformOrigin: '50% 50%' });
+        gsap.set(pin, { opacity: 0, scale: .4 });
+        gsap.set(rows, { opacity: 0, y: 12 });
+        gsap.set($$('.val__row s em', demo), { width: 0 });
+        gsap.set(chips, { opacity: 0, y: 8 });
+
+        tl.to(pin,  { opacity: 1, scale: 1, duration: .35, ease: 'back.out(2)' }, 0)
+          .to(ring, { opacity: 1, scale: 1, duration: .5, ease: 'power2.out' }, .1)
+          .to(pts,  { opacity: .85, scale: 1, duration: .3, stagger: .035, ease: 'back.out(2)' }, .25);
+        rows.forEach((r, i) => {
+          const at = 1.1 + i * .4;
+          tl.to(r, { opacity: 1, y: 0, duration: .4, ease: 'power2.out' }, at)
+            .to($('s em', r), { width: r.style.getPropertyValue('--w') || '50%', duration: .7, ease: 'power2.out' }, at + .15);
+        });
+        tl.to(chips, { opacity: 1, y: 0, duration: .35, stagger: .1, ease: 'power2.out' }, '>-.1');
+        break;
+      }
+
       // AdaptAI — a página densa se reescreve como página adaptada.
       case 'adapta': {
         const src   = $('.pg--src', demo), out = $('.pg--out', demo);

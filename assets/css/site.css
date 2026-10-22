@@ -1029,7 +1029,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 /* a espinha: item do grid, centrado entre as duas colunas */
 .swim::before{
   content:'';grid-column:1/-1;grid-row:2/8;justify-self:center;width:1px;
-  background:linear-gradient(to bottom,var(--line-strong) 82%,transparent);
+  background:linear-gradient(to bottom,rgba(159,199,155,.5) 82%,transparent);
 }
 /* o cabeçalho nomeia o lado; o filete fecha a coluna inteira */
 .swim__head{
@@ -1064,12 +1064,12 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
 .swim__step:not(:nth-of-type(1)) .swim__node::before{
   content:'';position:absolute;left:1px;top:-11px;width:7px;height:7px;
   border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);
-  transform:rotate(45deg);opacity:.8;
+  transform:rotate(45deg);
 }
 /* o traço curto que liga o texto à espinha */
 .swim__step::after{
   content:'';position:absolute;top:6px;width:calc(var(--swim-spine) / 2 - 8px);
-  height:1px;background:var(--line);
+  height:1px;background:rgba(159,199,155,.34);
 }
 .swim__step[data-lane="1"]::after{right:calc(var(--swim-spine) / -2 + 8px)}
 .swim__step[data-lane="2"]::after{left:calc(var(--swim-spine) / -2 + 8px)}

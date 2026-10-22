@@ -136,49 +136,51 @@
   <div class="wrap">
     <p class="eyebrow mb-m" data-rise>Como funciona</p>
     <h2 class="h-lg mb-l" data-split>Da oferta anunciada ao lançamento do imposto.</h2>
-    <div class="flow" data-rise>
-      <div class="flow__step">
-        <span class="flow__node" aria-hidden="true"></span>
-        <span class="flow__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.4"/><path d="M12 4.6a7.4 7.4 0 0 1 7.4 7.4M12 8.2a3.8 3.8 0 0 1 3.8 3.8"/><path d="M4.6 12A7.4 7.4 0 0 0 12 19.4"/></svg>Agente</span>
-        <span class="flow__k">01 · Captura</span>
+    <div class="swim" data-rise>
+      <p class="swim__head">O sistema executa</p>
+      <p class="swim__head">A pessoa decide</p>
+      <article class="swim__step" data-lane="1">
+        <span class="swim__node" aria-hidden="true"></span>
+        <span class="swim__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.4"/><path d="M12 4.6a7.4 7.4 0 0 1 7.4 7.4M12 8.2a3.8 3.8 0 0 1 3.8 3.8"/><path d="M4.6 12A7.4 7.4 0 0 0 12 19.4"/></svg>Agente</span>
+        <span class="swim__k">01 · Captura</span>
         <h3>O agente trabalha de madrugada</h3>
         <p>Portais de anúncio, transações do próprio ITBI, feeds de imobiliárias e planilhas. Cada registro vira amostra com tipologia, área, localização, preço, data e histórico de remarcação.</p>
-      </div>
-      <div class="flow__step">
-        <span class="flow__node" aria-hidden="true"></span>
-        <span class="flow__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.6 12S6 6.2 12 6.2 21.4 12 21.4 12 18 17.8 12 17.8 2.6 12 2.6 12Z"/><circle cx="12" cy="12" r="2.6"/></svg>Curador</span>
-        <span class="flow__k">02 · Curadoria</span>
+      </article>
+      <article class="swim__step" data-lane="2">
+        <span class="swim__node" aria-hidden="true"></span>
+        <span class="swim__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.6 12S6 6.2 12 6.2 21.4 12 21.4 12 18 17.8 12 17.8 2.6 12 2.6 12Z"/><circle cx="12" cy="12" r="2.6"/></svg>Curador</span>
+        <span class="swim__k">02 · Curadoria</span>
         <h3>O duvidoso vai para quarentena</h3>
         <p>Preço muito fora da mediana do bairro, dado faltando, possível duplicata: o curador decide. O resto fica ativo, com um score de qualidade de 0 a 1.</p>
-      </div>
-      <div class="flow__step">
-        <span class="flow__node" aria-hidden="true"></span>
-        <span class="flow__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h12.5M13.5 5l3 3-3 3"/><path d="M20 16H7.5M10.5 13l-3 3 3 3"/></svg>Sistema</span>
-        <span class="flow__k">03 · Solicitação</span>
+      </article>
+      <article class="swim__step" data-lane="1">
+        <span class="swim__node" aria-hidden="true"></span>
+        <span class="swim__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h12.5M13.5 5l3 3-3 3"/><path d="M20 16H7.5M10.5 13l-3 3 3 3"/></svg>Sistema</span>
+        <span class="swim__k">03 · Solicitação</span>
         <h3>A guia chega e é distribuída</h3>
         <p>Por integração com o sistema tributário, por lote CSV ou digitada. O sistema localiza o imóvel, pré-seleciona os comparáveis e entrega ao avaliador com menos trabalho em aberto.</p>
-      </div>
-      <div class="flow__step">
-        <span class="flow__node" aria-hidden="true"></span>
-        <span class="flow__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 14.5 10 9l3 3 6.5-6.5"/><path d="M15 5.5h4.5V10"/><path d="M4.5 19.5h15"/></svg>Avaliador</span>
-        <span class="flow__k">04 · Avaliação</span>
+      </article>
+      <article class="swim__step" data-lane="2">
+        <span class="swim__node" aria-hidden="true"></span>
+        <span class="swim__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 14.5 10 9l3 3 6.5-6.5"/><path d="M15 5.5h4.5V10"/><path d="M4.5 19.5h15"/></svg>Avaliador</span>
+        <span class="swim__k">04 · Avaliação</span>
         <h3>O avaliador decide, o motor calcula</h3>
         <p>Raio, área e período se ajustam na tela; amostras podem ser excluídas com justificativa registrada. O valor final é arbitrado dentro do campo de arbítrio permitido.</p>
-      </div>
-      <div class="flow__step">
-        <span class="flow__node" aria-hidden="true"></span>
-        <span class="flow__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 19 6v5.4c0 4-2.9 7.4-7 8.4-4.1-1-7-4.4-7-8.4V6Z"/><path d="m9.2 11.8 2 2 3.6-3.8"/></svg>Supervisor</span>
-        <span class="flow__k">05 · Homologação</span>
+      </article>
+      <article class="swim__step" data-lane="2">
+        <span class="swim__node" aria-hidden="true"></span>
+        <span class="swim__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 19 6v5.4c0 4-2.9 7.4-7 8.4-4.1-1-7-4.4-7-8.4V6Z"/><path d="m9.2 11.8 2 2 3.6-3.8"/></svg>Supervisor</span>
+        <span class="swim__k">05 · Homologação</span>
         <h3>O supervisor assina</h3>
         <p>Alertas, devolução com motivo ou homologação. Na homologação sai o laudo em PDF com assinatura PAdES ICP-Brasil, código de verificação público e despacho de lançamento.</p>
-      </div>
-      <div class="flow__step">
-        <span class="flow__node" aria-hidden="true"></span>
-        <span class="flow__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h12.5M13.5 5l3 3-3 3"/><path d="M20 16H7.5M10.5 13l-3 3 3 3"/></svg>Sistema</span>
-        <span class="flow__k">06 · Devolução</span>
+      </article>
+      <article class="swim__step" data-lane="1">
+        <span class="swim__node" aria-hidden="true"></span>
+        <span class="swim__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h12.5M13.5 5l3 3-3 3"/><path d="M20 16H7.5M10.5 13l-3 3 3 3"/></svg>Sistema</span>
+        <span class="swim__k">06 · Devolução</span>
         <h3>O resultado volta ao tributário</h3>
         <p>Valor, graus NBR e URL do laudo seguem para o sistema tributário por API, com reenvio automático em caso de falha. O contribuinte verifica e, se discordar, contesta.</p>
-      </div>
+      </article>
     </div>
   </div>
 </section>

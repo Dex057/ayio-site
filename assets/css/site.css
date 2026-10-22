@@ -1013,41 +1013,89 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.02;letter-s
   border:1px solid var(--p-badge-bd,rgba(255,255,255,.18));background:rgba(255,255,255,.04);
 }
 
-/* Linha do tempo do ciclo (página do produto)
+/* Fluxograma do ciclo (página do produto)
    Seis caixas iguais não diziam que uma coisa leva à outra, nem quem faz
-   cada parte. O trilho no topo de cada fileira dá a ordem; o selo diz o
-   responsável — e é ele que responde "quem opera isso na prefeitura?". */
-.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));row-gap:clamp(30px,3.6vw,52px)}
-.flow__step{
-  position:relative;padding:clamp(24px,2.4vw,30px) clamp(18px,2vw,28px) 4px;
-  display:grid;align-content:start;gap:9px;
-  border-top:1px solid var(--line-strong);
-  transition:background .5s var(--ease);
+   cada parte. Aqui há uma linha só, no centro: cada etapa é um nó nela e
+   o lado diz quem trabalha — máquina à esquerda, pessoa à direita. A troca
+   de lado é a informação. Sem SVG e sem JS: a seção lê igual com tudo off. */
+.swim{
+  --swim-spine:clamp(46px,6vw,104px);  /* corredor onde a espinha passa */
+  --swim-row:clamp(26px,2.8vw,44px);
+  --swim-rail:clamp(14px,1.4vw,22px);
+  display:grid;grid-template-columns:1fr 1fr;
+  column-gap:var(--swim-spine);row-gap:var(--swim-row);
+  max-width:1000px;margin-inline:auto;position:relative;
 }
-/* hairline entre as colunas da mesma fileira */
-.flow__step:not(:nth-child(3n+1))::before{
-  content:'';position:absolute;left:0;top:14px;bottom:14px;width:1px;background:var(--line);
+/* a espinha: item do grid, centrado entre as duas colunas */
+.swim::before{
+  content:'';grid-column:1/-1;grid-row:2/8;justify-self:center;width:1px;
+  background:linear-gradient(to bottom,var(--line-strong) 82%,transparent);
 }
-.flow__step:hover{background:rgba(255,255,255,.022)}
-/* o nó fica montado no trilho, no ponto onde a etapa começa */
-.flow__node{
-  position:absolute;left:0;top:-4.5px;width:9px;height:9px;border-radius:50%;
-  background:var(--accent);box-shadow:0 0 0 4px #0b1510,0 0 14px var(--glow);
+/* o cabeçalho nomeia o lado; o filete fecha a coluna inteira */
+.swim__head{
+  grid-row:1;align-self:end;padding-top:11px;
+  font-family:var(--display);font-weight:500;font-size:.66rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--text-faint);
+  border-top:1px solid var(--line);
 }
-.flow__who{
+.swim__head:nth-of-type(1){grid-column:1;text-align:right}
+.swim__head:nth-of-type(2){grid-column:2;color:var(--accent);border-top-color:rgba(159,199,155,.35)}
+.swim__step{
+  position:relative;display:grid;align-content:start;gap:9px;
+  padding-bottom:clamp(10px,1.2vw,18px);
+}
+/* a etapa encosta na espinha pelo lado de quem a executa */
+.swim__step[data-lane="1"]{grid-column:1;justify-items:end;text-align:right;padding-right:var(--swim-rail)}
+.swim__step[data-lane="2"]{grid-column:2;padding-left:var(--swim-rail)}
+.swim__step:nth-of-type(1){grid-row:2}
+.swim__step:nth-of-type(2){grid-row:3}
+.swim__step:nth-of-type(3){grid-row:4}
+.swim__step:nth-of-type(4){grid-row:5}
+.swim__step:nth-of-type(5){grid-row:6}
+.swim__step:nth-of-type(6){grid-row:7}
+/* o nó é a estação: fica na espinha, na altura em que a etapa começa */
+.swim__node{
+  position:absolute;top:2px;width:9px;height:9px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 0 4px var(--bg),0 0 14px var(--glow);
+}
+.swim__step[data-lane="1"] .swim__node{right:calc(var(--swim-spine) / -2 - 4.5px)}
+.swim__step[data-lane="2"] .swim__node{left:calc(var(--swim-spine) / -2 - 4.5px)}
+/* a ponta de seta que desce para dentro do nó */
+.swim__step:not(:nth-of-type(1)) .swim__node::before{
+  content:'';position:absolute;left:1px;top:-11px;width:7px;height:7px;
+  border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);
+  transform:rotate(45deg);opacity:.8;
+}
+/* o traço curto que liga o texto à espinha */
+.swim__step::after{
+  content:'';position:absolute;top:6px;width:calc(var(--swim-spine) / 2 - 8px);
+  height:1px;background:var(--line);
+}
+.swim__step[data-lane="1"]::after{right:calc(var(--swim-spine) / -2 + 8px)}
+.swim__step[data-lane="2"]::after{left:calc(var(--swim-spine) / -2 + 8px)}
+.swim__who{
   display:inline-flex;align-items:center;gap:7px;width:max-content;
   padding:5px 11px 5px 8px;border-radius:99px;
   border:1px solid rgba(159,199,155,.3);background:rgba(159,199,155,.09);
   font-family:var(--display);font-weight:500;font-size:.66rem;letter-spacing:.1em;
   text-transform:uppercase;color:var(--accent);
 }
-.flow__who svg{width:14px;height:14px;flex:0 0 auto}
-.flow__k{font-family:var(--display);font-weight:500;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint)}
-.flow__step h3{font-size:1.08rem;letter-spacing:-.02em}
-.flow__step p{font-size:.9rem;color:var(--text-dim)}
-@media(max-width:900px){
-  .flow{grid-template-columns:1fr;row-gap:clamp(22px,5vw,30px)}
-  .flow__step:not(:nth-child(3n+1))::before{display:none}
+.swim__who svg{width:14px;height:14px;flex:0 0 auto}
+.swim__k{font-family:var(--display);font-weight:500;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-faint)}
+.swim__step h3{font-size:1.08rem;letter-spacing:-.02em}
+.swim__step p{font-size:.9rem;color:var(--text-dim)}
+@media(max-width:860px){
+  /* em tela estreita a espinha vai para a esquerda e tudo alinha nela */
+  .swim{grid-template-columns:1fr;row-gap:var(--swim-row)}
+  .swim__head{display:none}
+  /* fora do grid: em coluna única a espinha corre rente à borda esquerda */
+  .swim::before{position:absolute;left:4px;top:6px;bottom:0;width:1px}
+  .swim__step{grid-column:1 !important;grid-row:auto !important;
+    justify-items:start !important;text-align:left !important;
+    padding:0 0 clamp(16px,3.4vw,26px) 26px !important}
+  .swim__step[data-lane] .swim__node{left:0;right:auto}
+  /* o traço até a espinha não faz falta quando o texto já encosta nela */
+  .swim__step[data-lane]::after{display:none}
 }
 
 /* ---------- Avalora: a cidade que acende ----------

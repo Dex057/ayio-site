@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <script>document.documentElement.classList.add('js')</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Avalora: inteligência imobiliária para a gestão do ITBI | AYIO</title>
-<meta name="description" content="Plataforma de avaliação imobiliária para o ITBI: base de mercado capturada automaticamente, motor NBR 14.653-2, laudo assinado digitalmente com verificação pública, contestação do contribuinte e trilha de auditoria reproduzível.">
+<title>Avalora: avaliação imobiliária para o ITBI e o patrimônio público | AYIO</title>
+<meta name="description" content="Plataforma de avaliação imobiliária para o ITBI e para o patrimônio público: base de mercado capturada automaticamente, motor NBR 14.653-2, laudo assinado digitalmente com verificação pública, lançamento do ITBI, vistoria de campo, contestação do contribuinte e trilha de auditoria reproduzível.">
 <meta name="theme-color" content="#09120E">
 <link rel="icon" href="../favicon.ico" sizes="48x48">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
@@ -52,9 +52,9 @@
   <canvas class="p-hero__canvas hero__canvas" aria-hidden="true"></canvas>
   <div class="p-hero__inner wrap">
     <p class="crumb"><a href="../index.html">AYIO</a> <span>/</span> <span>Produtos</span> <span>/</span> <span>Avalora</span></p>
-    <img class="p-hero__logo" src="../assets/brand/avalora-white.png" alt="Avalora: inteligência imobiliária para a gestão do ITBI" width="1100" height="372" data-rise>
+    <img class="p-hero__logo" src="../assets/brand/avalora-white.png" alt="Avalora: avaliação imobiliária para o ITBI e o patrimônio público" width="1100" height="372" data-rise>
     <h1 class="h-lg" data-split>O valor do imóvel deixa de ser arbitrado e passa a ser <em class="grad-accent" style="font-style:normal">demonstrado</em>.</h1>
-    <p class="lead mt-m" data-rise data-d="3">Avaliação imobiliária para o ITBI de ponta a ponta: a base de mercado se alimenta sozinha, o motor calcula pela NBR 14.653-2, o laudo sai assinado digitalmente e qualquer pessoa consegue verificar, contestar e refazer a conta.</p>
+    <p class="lead mt-m" data-rise data-d="3">Avaliação imobiliária para o ITBI de ponta a ponta: a base de mercado se alimenta sozinha, o motor calcula pela NBR 14.653-2, o laudo sai assinado digitalmente e qualquer pessoa consegue verificar, contestar e refazer a conta. O mesmo motor avalia os imóveis do próprio município, com vistoria em campo e depreciação anual.</p>
     <div class="hero__actions mt-m" data-rise data-d="4">
       <a class="btn btn--solid" href="#contato" data-magnet>Solicitar demonstração <i>→</i></a>
       <a class="btn btn--ghost" href="#ciclo" data-magnet>Ver o ciclo completo</a>
@@ -172,7 +172,7 @@
         <span class="swim__who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 19 6v5.4c0 4-2.9 7.4-7 8.4-4.1-1-7-4.4-7-8.4V6Z"/><path d="m9.2 11.8 2 2 3.6-3.8"/></svg>Supervisor</span>
         <span class="swim__k">05 · Homologação</span>
         <h3>O supervisor assina</h3>
-        <p>Alertas, devolução com motivo ou homologação. Na homologação sai o laudo em PDF com assinatura PAdES ICP-Brasil, código de verificação público e despacho de lançamento.</p>
+        <p>Alertas, devolução com motivo ou homologação. Na homologação sai o laudo em PDF com assinatura PAdES ICP-Brasil e código de verificação público, e fica liberado o despacho de lançamento do ITBI.</p>
       </article>
       <article class="swim__step" data-lane="1">
         <span class="swim__node" aria-hidden="true"></span>
@@ -598,8 +598,8 @@
           <span class="appshot__tag">Avalora — Comparáveis</span>
         </div>
         <button class="appshot__view" type="button" data-zoom aria-label="Ampliar a tela de comparáveis do Avalora">
-          <img src="../assets/img/avalora-comparaveis.webp" width="1366" height="860" loading="lazy" decoding="async"
-               alt="Tela de comparáveis do Avalora: mapa com as amostras no raio de busca e tabela com fonte, distância, área, preço por m², data e score de cada uma">
+          <img src="../assets/img/avalora-comparaveis.webp?v=2" width="1440" height="900" loading="lazy" decoding="async"
+               alt="Tela de comparáveis do Avalora: mapa de ruas com as amostras no raio de busca e tabela com fonte, distância, área, preço por m², data e score de cada uma; no topo, o aviso de que o grau III de fundamentação é atingível com 113 amostras">
           <span class="appshot__hint">Ampliar</span>
         </button>
       </div>
@@ -627,19 +627,88 @@
         <p class="methods__note" data-rise>Os quatro aparecem lado a lado na tela de resultado. <b>Divergência grande entre eles é sinal de base com problema</b>, não de valor difícil.</p>
       </div>
     </div>
+
+    <figure class="appshot mt-l" data-rise>
+      <div class="appshot__win">
+        <div class="appshot__bar">
+          <span class="appshot__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="appshot__tag">Avalora — Resultado e arbitramento</span>
+        </div>
+        <button class="appshot__view" type="button" data-zoom aria-label="Ampliar a tela de resultado do Avalora">
+          <img src="../assets/img/avalora-resultado.webp" width="1440" height="760" loading="lazy" decoding="async"
+               alt="Tela de resultado do Avalora: a regressão linear em destaque como método formal, com intervalo de confiança, R² e graus III de fundamentação e precisão, e os métodos de apoio KNN, Random Forest e Gradient Boosting com a diferença de cada um para a regressão">
+          <span class="appshot__hint">Ampliar</span>
+        </button>
+      </div>
+      <figcaption class="appshot__cap">
+        O método formal em destaque e os três de conferência logo abaixo, cada um com intervalo e <b>diferença
+        para a regressão</b>. Mais abaixo na mesma tela ficam os coeficientes, os resíduos padronizados e os
+        pontos de fundamentação que a norma cobra.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ LANÇAMENTO ============ -->
+<section class="section tint--av">
+  <div class="wrap">
+    <div class="split mb-l">
+      <p class="eyebrow" data-rise>O lançamento</p>
+      <div>
+        <h2 class="h-md mb-m" data-split>O laudo prova o valor; o despacho cobra o imposto.</h2>
+        <p class="lead">Depois da homologação, o sistema gera o despacho de lançamento no formato que o município já usa, com as seções I a IX: fixa a base de cálculo, constitui o crédito, manda emitir a guia e intima o contribuinte a impugnar. O relatório técnico da base de cálculo vai em anexo, com os comparáveis, os fatores de homogeneização e o tratamento estatístico.</p>
+      </div>
+    </div>
+    <figure class="appshot" data-rise>
+      <div class="appshot__win">
+        <div class="appshot__bar">
+          <span class="appshot__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="appshot__tag">Avalora — Lançamento do ITBI</span>
+        </div>
+        <button class="appshot__view" type="button" data-zoom aria-label="Ampliar a tela de lançamento do ITBI do Avalora">
+          <img src="../assets/img/avalora-lancamento.webp" width="1440" height="960" loading="lazy" decoding="async"
+               alt="Aba de lançamento do ITBI no Avalora: à esquerda o aviso do que falta preencher para a via oficial e os botões de minuta e de despacho oficial; à direita os dados do processo e das partes">
+          <span class="appshot__hint">Ampliar</span>
+        </button>
+      </div>
+      <figcaption class="appshot__cap">
+        À esquerda, o sistema lista o que ainda falta para a via oficial; à direita ficam os dados do processo e
+        das partes. A <b>minuta de conferência</b> sai a qualquer momento; o <b>despacho oficial</b> só depois da
+        homologação, assinado digitalmente e com código de verificação público. Nome e documento do contribuinte
+        aparecem só no despacho: laudo, observatório e páginas públicas nunca os exibem.
+      </figcaption>
+    </figure>
   </div>
 </section>
 
 <!-- ============ PAINEL ============ -->
-<section class="section tint--av">
+<section class="section">
   <div class="wrap">
     <div class="split mb-l">
       <p class="eyebrow" data-rise>A supervisão</p>
       <div>
-        <h2 class="h-md mb-m" data-split>O gestor vê a operação, não só o processo.</h2>
-        <p class="lead">Produtividade por avaliador, tempo de ciclo, taxa de devolução, desvio entre o declarado e o avaliado, distribuição dos graus NBR e a base de cálculo adicional recuperada no mês. Relatórios mensal e anual saem em PDF, prontos para prestação de contas.</p>
+        <h2 class="h-md mb-m" data-split>O gestor vê a operação e o mercado, não só o processo.</h2>
+        <p class="lead">A visão geral põe o município inteiro numa página: preço de referência, base de amostras, base de cálculo recuperada no mês e os bairros que mais subiram e caíram. O painel traz produtividade por avaliador, tempo de ciclo, taxa de devolução, desvio entre o declarado e o avaliado e a distribuição dos graus NBR. Relatórios mensal e anual saem em PDF e os dados, em CSV, prontos para prestação de contas.</p>
       </div>
     </div>
+    <figure class="appshot mb-l" data-rise>
+      <div class="appshot__win">
+        <div class="appshot__bar">
+          <span class="appshot__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="appshot__tag">Avalora — Visão geral</span>
+        </div>
+        <button class="appshot__view" type="button" data-zoom aria-label="Ampliar a visão geral do Avalora">
+          <img src="../assets/img/avalora-visao.webp" width="1440" height="956" loading="lazy" decoding="async"
+               alt="Visão geral do Avalora: cartões com preço de referência por m², base de amostras, avaliações de ITBI no mês e base de cálculo recuperada, mapa de calor do preço por bairro com linha do tempo, série de 12 meses e lista de bairros em alta e em baixa">
+          <span class="appshot__hint">Ampliar</span>
+        </button>
+      </div>
+      <figcaption class="appshot__cap">
+        O mapa de calor mostra o preço por m² bairro a bairro e a linha do tempo anima a evolução mês a mês. A
+        <b>base de cálculo recuperada</b> soma, nas avaliações homologadas do mês, a diferença positiva entre o
+        valor avaliado e o declarado, com o ITBI adicional estimado pela alíquota do município.
+      </figcaption>
+    </figure>
     <figure class="appshot" data-rise>
       <div class="appshot__win">
         <div class="appshot__bar">
@@ -647,21 +716,23 @@
           <span class="appshot__tag">Avalora — Painel de supervisão</span>
         </div>
         <button class="appshot__view" type="button" data-zoom aria-label="Ampliar o painel de supervisão do Avalora">
-          <img src="../assets/img/avalora-painel.webp" width="1440" height="1069" loading="lazy" decoding="async"
-               alt="Painel de supervisão do Avalora: avaliações no período, tempo de ciclo, taxa de devolução, desvio declarado contra avaliado e enquadramento NBR">
+          <img src="../assets/img/avalora-painel.webp?v=2" width="1440" height="985" loading="lazy" decoding="async"
+               alt="Painel de supervisão do Avalora: avaliações no período, tempo de ciclo, taxa de devolução, desvio declarado contra avaliado, grau de fundamentação, alertas de mercado por bairro e avaliações criadas, homologadas e devolvidas por mês">
           <span class="appshot__hint">Ampliar</span>
         </button>
       </div>
       <figcaption class="appshot__cap">
         O tempo de ciclo e a taxa de devolução não são digitados por ninguém: <b>saem da trilha de auditoria</b>,
-        que registra cada ação com autor, data e valores antes e depois.
+        que registra cada ação com autor, data e valores antes e depois. Todo dia o sistema compara os últimos 30
+        dias da base com os 30 anteriores e <b>alerta</b> queda ou alta de preço, salto de ofertas e remarcação em
+        massa, por bairro.
       </figcaption>
     </figure>
   </div>
 </section>
 
 <!-- ============ TRANSPARÊNCIA ============ -->
-<section class="section">
+<section class="section tint--av">
   <div class="wrap">
     <div class="split mb-l">
       <p class="eyebrow" data-rise>Transparência</p>
@@ -677,8 +748,8 @@
           <span class="appshot__tag">Avalora — Observatório público</span>
         </div>
         <button class="appshot__view" type="button" data-zoom aria-label="Ampliar o observatório público do Avalora">
-          <img src="../assets/img/avalora-observatorio.webp" width="1400" height="900" loading="lazy" decoding="async"
-               alt="Observatório público do Avalora: mediana do preço por m², quartis, tempo de exposição, remarcações de preço e mapa de calor por bairro">
+          <img src="../assets/img/avalora-observatorio.webp?v=2" width="1440" height="1000" loading="lazy" decoding="async"
+               alt="Observatório público do Avalora: seletor de município, mediana do preço por m², quartis, tempo de exposição, remarcações de preço e mapa de calor por bairro sobre o mapa da cidade">
           <span class="appshot__hint">Ampliar</span>
         </button>
       </div>
@@ -712,6 +783,32 @@
   </div>
 </section>
 
+<!-- ============ PATRIMÔNIO PÚBLICO ============ -->
+<section class="section">
+  <div class="wrap">
+    <p class="eyebrow mb-m" data-rise>Patrimônio público</p>
+    <h2 class="h-lg mb-m" data-split>Os imóveis do próprio município também passam a ter valor demonstrado.</h2>
+    <p class="lead mb-l" data-rise>Uma modalidade separada do ITBI, para gestão patrimonial e alienação, com o mesmo motor e a mesma trilha de auditoria. O valor contábil depreciado e o valor de avaliação de mercado aparecem lado a lado, e um nunca substitui o outro.</p>
+    <div class="grid g-3">
+      <article class="card" data-rise>
+        <span class="card__num">01 · Autorizar</span>
+        <h3 class="h-sm">O gestor cadastra e autoriza</h3>
+        <p>Código patrimonial, órgão detentor, zona, situação e valor contábil de cada bem. A avaliação é autorizada imóvel a imóvel ou em lote, e cada selecionado vira uma avaliação completa, com comparáveis e cálculo, direto na fila.</p>
+      </article>
+      <article class="card" data-rise data-d="1">
+        <span class="card__num">02 · Vistoriar</span>
+        <h3 class="h-sm">O técnico vistoria pelo celular</h3>
+        <p>A lista traz os imóveis designados. No local, ele registra conservação e ocupação e fotografa pelo próprio aparelho, sem aplicativo de loja. A foto guarda quem tirou, quando e, se o aparelho permitir, onde. Há fila de fotos para trabalhar sem sinal.</p>
+      </article>
+      <article class="card" data-rise data-d="2">
+        <span class="card__num">03 · Depreciar</span>
+        <h3 class="h-sm">A depreciação anual sai pronta</h3>
+        <p>Calculada pelo valor contábil, pela data de aquisição e pela vida útil, com simulação antes de confirmar e exportação em CSV. O terreno não deprecia e, passada a vida útil, o bem fica pelo valor residual. Para alienação, vale o laudo.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ============ BENEFÍCIOS ============ -->
 <section class="section tint--av">
   <div class="wrap">
@@ -726,6 +823,8 @@
       <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.4 8.6 3 3 6.2-7"/></svg><b>Prazo sob controle</b><span>Data-limite por avaliação, aviso e carga por avaliador.</span></li>
       <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.4 8.6 3 3 6.2-7"/></svg><b>Memória do mercado</b><span>Histórico de preços, remarcações e tempo de exposição.</span></li>
       <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.4 8.6 3 3 6.2-7"/></svg><b>LGPD por desenho</b><span>Sem dado pessoal no cálculo; retenção e expurgo automáticos.</span></li>
+      <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.4 8.6 3 3 6.2-7"/></svg><b>Patrimônio com procedência</b><span>Vistoria com foto, autor, data e local, e depreciação anual.</span></li>
+      <li><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.4 8.6 3 3 6.2-7"/></svg><b>Vários municípios</b><span>Cada prefeitura com usuários, parâmetros, fontes e laudos isolados.</span></li>
     </ul>
   </div>
 </section>
@@ -739,7 +838,7 @@
       <article class="card" data-rise><span class="card__num">01</span><h3 class="h-sm">Secretarias de Finanças</h3><p>Que lançam o ITBI e precisam de metodologia documentada e defensável.</p></article>
       <article class="card" data-rise data-d="1"><span class="card__num">02</span><h3 class="h-sm">Equipes de avaliação</h3><p>Avaliadores, supervisores e curadores que hoje trabalham em planilha.</p></article>
       <article class="card" data-rise data-d="2"><span class="card__num">03</span><h3 class="h-sm">Procuradorias municipais</h3><p>Que defendem o lançamento e precisam de prova técnica reproduzível.</p></article>
-      <article class="card" data-rise data-d="3"><span class="card__num">04</span><h3 class="h-sm">Gestão e planejamento</h3><p>Que acompanham arrecadação, mercado imobiliário e planta de valores.</p></article>
+      <article class="card" data-rise data-d="3"><span class="card__num">04</span><h3 class="h-sm">Gestão, planejamento e patrimônio</h3><p>Que acompanham arrecadação, mercado imobiliário, planta de valores e os bens imóveis do ente público.</p></article>
     </div>
   </div>
 </section>
@@ -786,7 +885,7 @@
     </div>
     <div class="footer__bot">
       <p>© <span data-year></span> AYIO · AI Software Studio.</p>
-      <p class="mono">Inteligência imobiliária para a gestão do ITBI</p>
+      <p class="mono">Avaliação imobiliária para o ITBI e o patrimônio público</p>
     </div>
   </div>
 </footer>
